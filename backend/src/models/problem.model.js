@@ -1,15 +1,15 @@
-import User from './models/user.model.js'
-
+import mongoose from 'mongoose';
 
 const ProblemSchema=new mongoose.Schema({
   problemNo:{
-    type:Number
+    type:Number,
+    required:true,
+    unique:true,
   },
   title:{
     type:String,
     required:true,
   },
-
   difficulty:{
     type:String,
     required:true,
@@ -17,15 +17,16 @@ const ProblemSchema=new mongoose.Schema({
 
   topic:{
     type:mongoose.Schema.Types.ObjectId,
-    ref:'Topic'
+    ref:'Topic',
+    required:true,
   },
   pattern:{
-    type:mongoose.Schema.Types.ObjectId,
-    ref:'Patterns'
+ type:mongoose.Schema.Types.ObjectId,
+    ref:'Pattern'
   },
-  ProblemStatus:{
+  problemStatus:{
     type:mongoose.Schema.Types.ObjectId,
-    ref:'status'
+    ref:'ProblemStatus',
   },
 
   url:{
@@ -39,6 +40,6 @@ const ProblemSchema=new mongoose.Schema({
   timestamps:true
 });
 
-const Problem= mongoose.model(Problem,"ProblemSchema")
+const Problem= mongoose.model("Problem",ProblemSchema);
 
 export default Problem;

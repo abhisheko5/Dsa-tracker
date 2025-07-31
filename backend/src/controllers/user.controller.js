@@ -76,5 +76,30 @@ const loginUser = async(req,res)=>{
   )
 }
 
+const logoutUser=async(req,res)=>{
+   await User.findByIdAndUpdate(
+        req.user._id,
+        {
+            $unset:{refreshToken:1}
+        },
+        {
+            new:true,
+        }
+    )
 
-export {registerUser,loginUser};
+    const options = {
+        httpOnly:true,
+        secure:true,
+}
+
+return res
+.status(200)
+.clearCookie("accessToken", options)
+.clearCookie("refreshToken", options)
+.json(
+    new ApiResponse(200,null,"User logged out successfully")
+)
+};
+
+
+export {registerUser,loginUser,logoutUser};

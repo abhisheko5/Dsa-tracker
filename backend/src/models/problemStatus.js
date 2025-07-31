@@ -1,8 +1,8 @@
-import User from './models/user.model.js'
-import Problem from './models/problem.model.js'
+import User from './user.model.js'
+import Problem from './problem.model.js'
+import mongoose from 'mongoose';
 
-
-const statusSchema= new mongoose.Schema({
+const ProblemstatusSchema= new mongoose.Schema({
   user:{
   type:mongoose.Schema.Types.ObjectId,
     ref:'User'    
@@ -10,28 +10,31 @@ const statusSchema= new mongoose.Schema({
 
   problem:{
     type:mongoose.Schema.Types.ObjectId,
-    ref:'Problem'
+    ref:'Problem',
+    required:true
   },
 
   status:{
     type:String,
+    enum:['solved','unsolved','attempted'],
     default:'unsolved'
   },
   lastAttempted:{
-    type:Date()
+    type:Date,
+    default:null,
   },
   attempts:{
     type:Number,
     default:0
   },
 
-  revisionDate:[Date()],
+  revisionDate:[Date],
 
   intuition:{
     type:String
   }
 })
 
-const Status=mongoose.model(Status,"statusSchema");
+const ProblemStatus=mongoose.model("ProblemStatus",ProblemstatusSchema);
 
-export default Status;
+export default ProblemStatus;
