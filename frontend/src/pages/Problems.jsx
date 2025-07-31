@@ -2,7 +2,6 @@ import React from "react";
 import Sidebar from "../components/SidePanel.jsx";
 import Navbar from "../components/Navbar.jsx";
 import Problemtable from "../components/Problemtable.jsx";
-import ProblemForm from "../components/ProblemsAdd.jsx";
 
 
 const Problems=()=>{

@@ -6,7 +6,6 @@ import ProblemStatus from "../models/problemStatus.js";
 
 const markproblemStatus=async(req,res)=>{
 
-
   const{problemNo}=req.params;
 
 if(!problemNo){
@@ -28,24 +27,19 @@ if(problemtomark){
   problemtomark.lastAttempted=new Date();
   
   const today = new Date();
-  const spacedRevisions = [1, 3, 7, 14, 30];
-  problemtomark.revisionDate = spacedRevisions.map(days => {
+  const Revisions = [1, 3, 7, 14, 30];
+  problemtomark.revisionDate = Revisions.map(days => {
     const date = new Date(today);
     date.setDate(date.getDate() + days);
     return date;
   });
+
+  console.log("revision dates to save",problemtomark.revisionDate);
   await problemtomark.save();
 
 }
 }
-else{
-  problemtomark=new ProblemStatus({
-    problem:problem._id,
-    status:"solved",
-    lastAttempted:new Date(),
-    attempts:attempts+1
-  });
-}
+
 
 
 await problemtomark.populate({
@@ -63,9 +57,52 @@ return res
 
 }
 
-const markRevisiondone=async(req,res)=>{
-  
-}
+const getproblemProgress=async(req,res)=>{
+  const totalProblems=await Problem.countDocuments();
+
+  const solvedProblems= await Problem.aggregate([
+    {
+      $lookup:{
+        from:"problemstatuses",
+        localField:"problemStatus",
+        foreignField:"_id",
+        as:"statusInfo"
+    },
+  },{$unwind:"$statusInfo"},
+    {$match:
+      {"statusInfo.status":"solved"}},
+    {$count:"solved"}
+]);
+
+return res
+.status(200)
+.json(
+  new ApiResponse(200,{
+    totalProblems,
+    solvedProblems,
+    progress:`${solvedProblems}/${totalProblems}`
+  },"overall problem solving progress"
+  )
+);
+};
+const getProblemstats=async(req,res)=>{
+  const count=await ProblemStatus.aggregate([
+    {
+    $group:{
+      _id:'$status',
+      count:{$sum:1}
+    }
+  }
+  ])
+
+
+return res
+.status(200)
+.json(
+  new ApiResponse(200,count,"problem count done successfyully")
+)
+};
+
 const getLastSolvedProblems=async(req,res)=>{
     const userId=req.user.id;
 
@@ -81,4 +118,29 @@ const getLastSolvedProblems=async(req,res)=>{
     .status(200)
     .json(solvedProblems);
 }
-export {markproblemStatus};
+
+const addOneliner =async(req,res)=>{
+  const{ProblemNo}=req.params;
+  const{intuition}=req.body;
+  if(!intuition){
+    throw new ApiError(404,"no intuition lin found");
+  }
+  const problem=await Problem.findOne({ProblemNo})
+
+  if(!problem){
+    throw new ApiError(404,"problem not found");
+  }
+
+  const status=await ProblemStatus.findOne({problem:problem._id});
+
+  if(status){
+    status.intuition=intuition}
+
+    await status.save();
+    return res
+    .status(200)
+    .json(
+      new ApiResponse(200,status,"one liner added successfully")
+    )
+}
+export {markproblemStatus,getProblemstats,getproblemProgress,addOneliner};

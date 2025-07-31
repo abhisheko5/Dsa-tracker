@@ -28,7 +28,10 @@ const ProblemstatusSchema= new mongoose.Schema({
     default:0
   },
 
-  revisionDate:[Date],
+  revisionDate:{
+    type:[Date],
+    default:[],
+  },
 
   intuition:{
     type:String
