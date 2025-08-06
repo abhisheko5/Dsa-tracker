@@ -18,6 +18,7 @@ const ProblemForm = () => {
       title:problemTitle,
       problemNo,
       topic,
+      difficulty,
       problemStatus:status,
       url,platform
     }
@@ -93,7 +94,7 @@ const ProblemForm = () => {
           setTopic(selectedOptions)}
         }>
           <option value="" disabled>Select Topic</option>
-          <option value="array">Array</option>
+          <option value="Array">Array</option>
           <option value="string">String</option>
           <option value="ll">Linked List</option>
           <option value="stack">Stack</option>

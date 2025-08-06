@@ -1,7 +1,7 @@
-import react,{useState} from 'react';
+import eact,{useState} from 'react';
 
  function Login(){
-  const[isLoggedIn,setIsLoggedIn]=useState();
+  const[isLoggedIn,setIsLoggedIn]=useState(true);
 
 
   return(
@@ -16,10 +16,9 @@ import react,{useState} from 'react';
   </div>
 
 
-if(isLoggedin ?:(
     <div className="flex justify-end items-center  px-4 w-1/2">
       {/*login form*/}
-      
+      if(isLoggedIn){
       <form className="flex justify-end flex-col gap-2.5 bg-[#1f1f1f] p-8 w-[450px] rounded-[20px] font-sans">
   <div className="flex flex-col">
     <h1 className="text-white font-bold text-3xl mb-2">Welcome back</h1>
@@ -61,11 +60,10 @@ if(isLoggedin ?:(
 
   
 </form>
-)
-
-:
+ }
+ 
 {/* sign up form */}
-
+else{
 <form className="flex justify-end flex-col gap-2.5 bg-[#1f1f1f] p-8 w-[450px] rounded-[20px] font-sans">
   <div className="flex flex-col">
     <h1 className="text-white font-semibold text-2xl">Sign Up form</h1>
@@ -118,8 +116,8 @@ if(isLoggedin ?:(
   </button>
 </form>
 
-
-
+ }
+ 
 </div>
 
   </div>

@@ -7,6 +7,8 @@ import {ApiError} from '../utils/apiError.js';
 import {ApiResponse} from "../utils/apiResponse.js"
 
 const addProblem=async(req,res)=>{
+  console.log(req.body);
+
   
   const{title,
 difficulty,

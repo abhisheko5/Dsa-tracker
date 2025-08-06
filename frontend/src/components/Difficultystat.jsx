@@ -14,7 +14,7 @@ const DifficultyStat = () => {
   };
 
   return (
-    <div className="flex justify-between text-center">
+    <div className="flex justify-between text-center w-full px-4">
       {Object.entries(difficultyData).map(([level, count]) => (
         <div key={level}>
           <h3 className={`font-semibold text-sm ${colorMap[level]}`}>

@@ -9,12 +9,12 @@ function Sidebar(){
       <ul className="space-y-3">
         <li className="hover:bg-gray-200 p-2 rounded" onClick={()=>navigate("/home")}>Dashboard</li>
         <li className="hover:bg-gray-200 p-2 rounded" onClick={()=>navigate("/Problem")}>Problems</li>
-        <li className="hover:bg-gray-200 p-2 rounded">Revision</li>
+        <li className="hover:bg-gray-200 p-2 rounded" onClick={()=>navigate("/revision")}>Revision</li>
         <li className="hover:bg-gray-200 p-2 rounded">Analytics</li>
         <li className="hover:bg-gray-200 p-2 rounded" onClick={()=>navigate("/add-problem")}>Add problem</li>
         <li className="hover:bg-gray-200 p-2 rounded">Recent Problems</li>
         <li className="hover:bg-gray-200 p-2 rounded">Chat with ai</li>
-        <li className="hover:bg-gray-200 p-2 rounded">⚙️ Settings</li>
+        <li className="hover:bg-gray-200 p-2 rounded" onClick={()=>navigate("/settings")}>⚙️ Settings</li>
       </ul>
     </div>
   )
