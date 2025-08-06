@@ -207,36 +207,7 @@ const getsingleProblem=async(req,res)=>{
   )
 }
 
-const getproblemProgress=async(req,res)=>{
-  const totalProblems=await Problem.countDocuments();
-
-  const solvedProblems= await Problem.aggregate([
-    {
-      $lookup:{
-        from:"problemstatuses",
-        localField:"problemStatus",
-        foreignField:"_id",
-        as:"statusInfo"
-    },
-  },{$unwind:"$statusInfo"},
-    {$match:
-      {"statusInfo.status":"solved"}},
-    {$count:"solved"}
-]);
-
-return res
-.status(200)
-.json(
-  new ApiResponse(200,{
-    totalProblems,
-    solvedProblems,
-    progress:`${solvedProblems}/${totalProblems}`
-  },"overall problem solving progress"
-  )
-);
-};
 
 
-export{addProblem,updateProblem,deleteProblem,getallProblems,getsingleProblem,
-  getproblemProgress
-};
+
+export{addProblem,updateProblem,deleteProblem,getallProblems,getsingleProblem};

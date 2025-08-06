@@ -11,8 +11,8 @@ import CalendarCard from '../components/Calendar';
 const Home=()=>{
   return(
     <div className=" flex h-screen ">
-      <Sidebar/>
-      <div className=" flex flex-col flex-1 bg-gray-100">
+
+      <div className=" flex flex-col flex-1 bg-gray-100 ">
         <Navbar/>
         <div className="grid grid-cols-3 gap-4 p-5 items-stretch">
         <Card className=" w-75 h-[220px]"> <Donutbar/></Card>

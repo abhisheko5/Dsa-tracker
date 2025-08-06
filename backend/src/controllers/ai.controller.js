@@ -1,26 +1,19 @@
-import openai from '../openai.js';
-
-
-const getDSAResponse=async(req,res)=> {
+import {askOpenAI} from '../utils/aihelper.js';
+const getDSAResponse=async(req,res)=>{
   try{  
   const prompt=req.body.prompt;
-    const response = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo",
-      messages: [
-        { role: "system", content: "You are a helpful DSA tutor. Give conceptual explanations, generate problems, and provide first-level hints only." },
-        { role: "user", content: prompt },
-      ],
-      max_tokens: 500,
-      temperature: 0.5,
-    });
+    const aiReply=await askOpenAI(prompt);
 
-    const aiReply = response.data.choices[0].message.content;
-    console.log("\nAI Response:\n", aiReply);
-    return aiReply;
-  
-  } catch (error) {
-    console.error("Error:", error.message);
+    res.json({aiReply});
+    
   }
+  catch(error){
+    console.error("ai error",error.message);
+    res.status(500).json({error:"failed to get AI response"})
+  }
+}
+const generatesimilarProblems=async(req,res)=>{
+
 }
 
 export {getDSAResponse};

@@ -1,7 +1,6 @@
 import express from 'express';
 import Problem from "../models/problem.model.js";
-import {addProblem,updateProblem,deleteProblem,getallProblems,getsingleProblem,
-  getproblemProgress
+import {addProblem,updateProblem,deleteProblem,getallProblems,getsingleProblem
 } from "../controllers/problem.controller.js"
 import {getDSAResponse} from '../controllers/ai.controller.js'
 

@@ -7,7 +7,6 @@ import Problemtable from "../components/Problemtable.jsx";
 const Problems=()=>{
   return(
     <div className=" flex h-screen ">
-      <Sidebar/>
       <div className=" flex flex-col flex-1 bg-gray-100 p-5">
         <Problemtable/>
         

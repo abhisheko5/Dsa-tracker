@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import Layout from './components/Layout.jsx'
 import Login from './pages/Login.jsx'
 import Home from './pages/home.jsx'
 import Problems from './pages/problems.jsx'
@@ -12,11 +13,13 @@ function App() {
   return (
    <div>
     <Routes>
-   <Route path="/" element={ <Login/>} ></Route>
+         <Route path="/" element={ <Login/>} ></Route>
+
+      <Route path="/" element={<Layout/>}>
    <Route path="/home" element={ <Home/>} ></Route>
    <Route path="/Problem" element={ <Problems/>} ></Route>
    <Route path="/add-problem" element={ <AddProblem/>} ></Route>
-
+</Route>
 </Routes>
    </div>
   )
