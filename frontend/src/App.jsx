@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Layout from './components/Layout.jsx'
 import Login from './pages/Login.jsx'
 import Home from './pages/home.jsx'
+import ChatwithAi from './pages/Ai.jsx'
 import Problems from './pages/problems.jsx'
 import AddProblem from './pages/AddProblem.jsx'
 import Revision from './pages/revision.jsx'
@@ -25,6 +26,7 @@ function App() {
    <Route path="/add-problem" element={ <AddProblem/>} ></Route>
    <Route path="/revision" element={ <Revision/>} ></Route>
    <Route path="/settings" element={ <Settings/>} ></Route>
+   <Route path="/chat-with-ai" element={ <ChatwithAi/>} ></Route>
 </Route>
 </Routes>
    </div>

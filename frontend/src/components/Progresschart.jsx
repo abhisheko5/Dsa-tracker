@@ -1,4 +1,4 @@
-import react from 'react';
+import React from 'react';
 import {LineChart,Line,CartesianGrid,XAxis,YAxis,Legend,Tooltip,ResponsiveContainer} from 'recharts';
 
 const data=[{name:'two pointer',uv:400, pv:2400, amt:10},

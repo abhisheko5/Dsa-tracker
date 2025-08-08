@@ -1,5 +1,6 @@
 import React from "react";
 import axios from 'axios';
+import { useProblemContext } from "../context/ProblemContext";
 
 
 const ProblemForm = () => {
@@ -10,6 +11,7 @@ const ProblemForm = () => {
   const[status, setStatus] = React.useState("unsolved");
   const[url, setUrl] = React.useState("");
   const[platform, setPlatform] = React.useState("");
+  const { setproblems } = useProblemContext();
   
   const handleSubmit= async(e)=>{
     e.preventDefault();
@@ -26,6 +28,7 @@ const ProblemForm = () => {
     try{
       const response= await axios.post('http://localhost:3000/api/problem/add',problemData);
     console.log("response",response.data);
+    setproblems(prevProblems => [...prevProblems, response.data.data]);
   }
     catch(error){
       console.error('error adding problem',error);

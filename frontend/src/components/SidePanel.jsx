@@ -13,9 +13,14 @@ function Sidebar(){
         <li className="hover:bg-gray-200 p-2 rounded">Analytics</li>
         <li className="hover:bg-gray-200 p-2 rounded" onClick={()=>navigate("/add-problem")}>Add problem</li>
         <li className="hover:bg-gray-200 p-2 rounded">Recent Problems</li>
-        <li className="hover:bg-gray-200 p-2 rounded">Chat with ai</li>
+        <li className="hover:bg-gray-200 p-2 rounded" onClick={()=>navigate("/chat-with-ai")}>Chat with ai</li>
         <li className="hover:bg-gray-200 p-2 rounded" onClick={()=>navigate("/settings")}>⚙️ Settings</li>
       </ul>
+      <div className="mt-40">
+        <button className="w-full bg-gray-600 b text-white py-2 rounded hover:bg-indigo-700 transition">
+          Logout
+        </button>
+    </div>
     </div>
   )
 }

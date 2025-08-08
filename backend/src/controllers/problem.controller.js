@@ -66,7 +66,7 @@ await problem.save();
 return res
 .status(201)
 .json(
-  new ApiResponse(200,"new problem added successfully")
+  new ApiResponse(200,problem,"new problem added successfully")
 )
 };
 
