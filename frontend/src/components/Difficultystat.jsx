@@ -1,16 +1,30 @@
 import React from 'react';
-
+import { useState,useEffect } from 'react';
+import axios from 'axios';
 const DifficultyStat = () => {
-  const difficultyData = {
-    easy: 42,
-    medium: 28,
-    hard: 8,
-  };
+
+  const [difficultyData, setDifficultyData] = useState({});
+
+  useEffect(() => {
+    const fetchDifficultyData = async () => {
+        
+      try{
+      
+      const response= await axios.get('http://localhost:3000/api/stats/getstatsbydiff');
+        setDifficultyData(response.data.data || {});
+    
+      }
+  catch(error){
+    console.log(error);
+  }
+}
+  fetchDifficultyData()
+},[])
 
   const colorMap = {
-    easy: 'text-green-500',
-    medium: 'text-yellow-500',
-    hard: 'text-red-500',
+    Easy: 'text-green-500',
+    Medium: 'text-yellow-500',
+    Hard: 'text-red-500',
   };
 
   return (

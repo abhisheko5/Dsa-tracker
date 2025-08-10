@@ -15,7 +15,7 @@ const Revision = () => {
     try{
     
       const Revisiondue= await axios.get('http://localhost:3000/api/revision/revision-schedule');
-      setRevisionDue(Revisiondue.data?[Revisiondue.data] : []);
+      setRevisionDue(Revisiondue.data.data || []);
       console.log("Revision Due Problems:", Revisiondue.data);
     }
     catch(error){
@@ -32,11 +32,11 @@ fetchRevisionDue();
     
     
       <div className="flex flex-col items-center justify-center py-10 px-4">
-        <Card className="w-full max-w-3xl p-8 bg-white shadow-lg rounded-xl mb-8">
-          <h1 className="text-3xl font-bold text-gray-700 mb-2 text-center">Revision Dashboard</h1>
+     <h1 className="text-3xl font-bold text-gray-700 mb-2 text-center">Revision Dashboard</h1>
           <p className="text-gray-600 text-center ">Review and practice problems you've marked for revision. Stay consistent and track your progress!</p>
-        </Card>
         <RevisionTable problems={revisionDue}/>
+      
+        
         
     </div>
   );

@@ -20,7 +20,7 @@ app.use('/api/users', userRoutes);
 app.use('/api/problem', problemRoutes);
 app.use('/api/revision',revisionRoutes);
 app.use('/api/status',problemStatusRoutes);
-app.use('/api/problem/stats',analyticsRoutes);
+app.use('/api/stats',analyticsRoutes);
 
 
 

@@ -12,11 +12,11 @@ function Problemtable({ problems }) {
      <table className="min-w-full bg-white border border-gray-200 rounded-lg overflow-hidden ">
     <thead className="">
       <tr>
-        <th className="">No</th>
-        <th>Title</th>
-        <th>Difficulty</th>
-        <th>Topic</th>
-        <th>Status</th>
+        <th className="px-4 py-2 text-left text-gray-700">No</th>
+        <th className="px-4 py-2 text-left text-gray-700">Title</th>
+        <th className="px-4 py-2 text-left text-gray-700">Difficulty</th>
+        <th className="px-4 py-2 text-left text-gray-700">Topic</th>
+        <th className="px-4 py-2 text-left text-gray-700">Status</th>
       </tr>
     </thead>
     <tbody>

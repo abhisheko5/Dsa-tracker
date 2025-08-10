@@ -84,10 +84,12 @@ const result = await ProblemStatus.aggregate([
   { $unwind: "$problem" },
   {
     $project: {
-      _id: 0,
-      problemId: 1,
+      _id:"$problem._id",
       title: "$problem.title",
-      difficulty: "$problem.difficulty"
+      difficulty: "$problem.difficulty",
+      Attempted:"$lastAttempted",
+      status:"$status",
+      url:"$problem.url"
     }
   }
 ]);
