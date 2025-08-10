@@ -1,6 +1,4 @@
 import AiCard from '../components/AiCard.jsx'
-import axios from 'axios';
-
 
 const ChatwithAi= ()=>{
   

@@ -42,7 +42,7 @@ const problemtomark= await ProblemStatus.findOne({problem:problem._id});
     await problemtomark.save();
 }
 else{
-  throw new ApiError(400,"problem needs tobe solved for revision");
+  throw new ApiError(400,"problem needs to be solved for revision");
 }
 
     return res
@@ -51,19 +51,32 @@ else{
 };
 
 const todayRevisionSchedule=async(req,res)=>{
-  const today = new Date();
-today.setHours(0, 0, 0, 0);
+  const now = new Date();
+
+const startOfDayUTC = new Date(Date.UTC(
+  now.getUTCFullYear(),
+  now.getUTCMonth(),
+  now.getUTCDate(),
+  0, 0, 0, 0
+));
+
+const endOfDayUTC = new Date(Date.UTC(
+  now.getUTCFullYear(),
+  now.getUTCMonth(),
+  now.getUTCDate(),
+  23, 59, 59, 999
+));
 
 const result = await ProblemStatus.aggregate([
   {
     $match: {
-      revisionDate: today,
+      revisionDate:{ $elemMatch:{$gte:startOfDayUTC,$lte:endOfDayUTC}}
     }
   },
   {
     $lookup: {
       from: "problems",
-      localField: "problemId",
+      localField: "problem",
       foreignField: "_id",
       as: "problem"
     }
@@ -78,6 +91,8 @@ const result = await ProblemStatus.aggregate([
     }
   }
 ]);
+
+
 
 return res
 .status(200)

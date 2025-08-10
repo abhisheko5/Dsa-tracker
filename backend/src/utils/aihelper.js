@@ -1,6 +1,6 @@
 import fetch from "node-fetch";
 
-export const askOpenAI = async (userPrompt, systemPrompt = "You are a helpful DSA tutor and give answer in 2lines max") => {
+export const askOpenAI = async (userPrompt, systemPrompt = "You are a helpful DSA tutor and give answer") => {
   
   try{
     const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {

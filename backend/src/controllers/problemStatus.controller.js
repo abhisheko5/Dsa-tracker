@@ -27,7 +27,7 @@ if(problemtomark){
   problemtomark.lastAttempted=new Date();
   
   const today = new Date();
-  const Revisions = [1, 3, 7, 14, 30];
+  const Revisions = [0, 3, 7, 14, 30];
   problemtomark.revisionDate = Revisions.map(days => {
     const date = new Date(today);
     date.setDate(date.getDate() + days);
