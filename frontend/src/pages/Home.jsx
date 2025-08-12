@@ -7,6 +7,9 @@ import Donutbar from "../components/Piecharts.jsx";
 import DifficultyStat from '../components/DifficultyStat';
 import CalendarCard from '../components/Calendar';
 import RecentProblems from '../components/Recentproblems.jsx';
+import TotalProgress from '../components/TotalProgress.jsx';
+import Chatbot from '../components/Chatbot.jsx';
+import TotalChart from '../components/RadarChart.jsx';
 
 
 const Home=()=>{
@@ -34,22 +37,27 @@ const Home=()=>{
           
 
           {/* Calendar Card */}
-          <Card className="rounded-xl shadow-lg bg-gradient-to-br from-white to-blue-50 flex  items-center justify-between p-6">
+          <Card className="flex flex-col items-center justify-start h-[270px] shadow-lg bg-white"> 
+           <RecentProblems />
+
           </Card>
 
           
-          <Card className="col-span-2 p-4 bg-gradient-to-r from-indigo-100 to-purple-100 shadow-lg flex items-center justify-center">
+
+
+          
+          <Card className="col-span-2 p-4  shadow-lg flex items-center justify-center">
             <Progressbar />
           </Card>
-          <div className="flex-1 flex items-center justify-center">
-              <RecentProblems />
-            </div>
+          <Card className="flex-1 flex items-center justify-center">
+            <TotalChart />
+            </Card>
 
           {/* Progress Bar Card - spans 2 columns */}
           
         </div>
       </div>
-
+      <Chatbot />
     </div>
 
       )    

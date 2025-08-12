@@ -108,11 +108,12 @@ const getLastSolvedProblems=async(req,res)=>{
 
     const solvedProblems= await ProblemStatus.find({
     status:"solved"
-    }).
-    sort({updatedAt:-1})
+    }).populate({
+      path:'problem',
+      select:'title difficulty'
+    })
+    .sort({updatedAt:-1})
     .limit(5)
-    .populate('problem');
-
     return res
     .status(200)
     .json(

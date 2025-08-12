@@ -2,10 +2,6 @@ import React,{useEffect,useState} from 'react';
 import {LineChart,Line,CartesianGrid,XAxis,YAxis,Legend,Tooltip,ResponsiveContainer} from 'recharts';
 import axios from 'axios';
 
-
-
-
-
 const MyChart = () => {
 
   const[data, setData] = useState([]);
@@ -36,9 +32,6 @@ const MyChart = () => {
 }
     getProgressData();
 },[])
-
-
-
 
 
   return (
