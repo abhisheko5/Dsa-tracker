@@ -1,5 +1,5 @@
-
-import React from "react";
+import React,{useState,useEffect} from "react";
+import axios from "axios";
 
 const recentProblems = [
   { id: 1, title: "Two Sum", date: "2025-08-05", difficulty: "Easy" },
@@ -9,6 +9,23 @@ const recentProblems = [
 ];
 
 const RecentProblems = () => {
+  
+  const[recentProblems, setRecentProblems]=useState();
+
+  useEffect(() => {
+    const fetchRecentProblems = async () => {
+      try{
+        const response = await axios.get('http://localhost:3000/api/status/recentproblems')
+        setRecentProblems(response.data.data || []);
+      }
+      catch(error) {
+        console.error("Error fetching recent problems:", error);
+      }
+    }
+    fetchRecentProblems();
+  },[]);
+  
+  
   return (
     <div className="w-full h-full flex flex-col items-center justify-start p-2">
       <h2 className="text-xl font-bold text-indigo-700 mb-2 text-center">Recent Problems</h2>

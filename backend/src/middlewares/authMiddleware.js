@@ -2,7 +2,6 @@ import {ApiError} from '../utils/apiError.js';
 import jwt from 'jsonwebtoken';
 import User from "../models/user.model.js";
 
-
 export const authMiddleware = async (req, res, next) => {
     try{
         const token = req.cookies?.accessToken || req.headers.authorization?.replace('Bearer ', '');

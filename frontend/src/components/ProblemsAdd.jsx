@@ -98,9 +98,9 @@ const ProblemForm = () => {
         }>
           <option value="" disabled>Select Topic</option>
           <option value="Array">Array</option>
-          <option value="string">String</option>
-          <option value="ll">Linked List</option>
-          <option value="stack">Stack</option>
+          <option value="String">String</option>
+          <option value="Linked List">Linked List</option>
+          <option value="Stack">Stack</option>
           <option value="queue">Queue</option>
           <option value="graph">Graph</option>
           <option value="tree">Trees</option>

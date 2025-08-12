@@ -104,19 +104,20 @@ return res
 };
 
 const getLastSolvedProblems=async(req,res)=>{
-    const userId=req.user.id;
+
 
     const solvedProblems= await ProblemStatus.find({
-      user:userId,
-      status:"solved"
+    status:"solved"
     }).
     sort({updatedAt:-1})
-    .limit(10)
+    .limit(5)
     .populate('problem');
 
     return res
     .status(200)
-    .json(solvedProblems);
+    .json(
+      new ApiResponse(200,solvedProblems,"last 5 problems fetched")
+    )
 }
 
 const addOneliner =async(req,res)=>{
@@ -143,4 +144,4 @@ const addOneliner =async(req,res)=>{
       new ApiResponse(200,status,"one liner added successfully")
     )
 }
-export {markproblemStatus,getProblemstats,getproblemProgress,addOneliner};
+export {markproblemStatus,getProblemstats,getproblemProgress,addOneliner,getLastSolvedProblems};

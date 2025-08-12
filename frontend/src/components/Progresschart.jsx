@@ -1,18 +1,46 @@
-import React from 'react';
+import React,{useEffect,useState} from 'react';
 import {LineChart,Line,CartesianGrid,XAxis,YAxis,Legend,Tooltip,ResponsiveContainer} from 'recharts';
-
-const data=[{name:'two pointer',uv:400, pv:2400, amt:10},
-  {name:'sliding window',uv:400, pv:2400, amt:20},
-  {name:'binary',uv:400, pv:2400, amt:4},
-  {name:'queue',uv:400, pv:2400, amt:7},
-  {name:'stack',uv:400, pv:2400, amt:6},
-  {name:'recursion',uv:400, pv:2400, amt:13}
+import axios from 'axios';
 
 
-];
+
 
 
 const MyChart = () => {
+
+  const[data, setData] = useState([]);
+
+  useEffect(()=>{
+    const getProgressData = async () => {
+      try{
+        const response = await axios.get('http://localhost:3000/api/stats/getstatsbytopic');
+        console.log("response",response);
+       
+      if (response.data && response.data.success) {
+        const dataObj = response.data.data; // this is an object: { "two pointer": 10, ... }
+
+        // Convert object to array suitable for recharts:
+        const formattedData = Object.entries(dataObj).map(([name, amt]) => ({
+          name,
+          amt,
+        }));
+
+        setData(formattedData);
+      } else {
+        console.error("API error:", response.data.message);
+      }
+    } catch (error) {
+      console.error("Error fetching progress data:", error);
+    } 
+    
+}
+    getProgressData();
+},[])
+
+
+
+
+
   return (
     <ResponsiveContainer width="100%" height={300}>
       <LineChart
@@ -48,7 +76,7 @@ animationDuration={1000}
 function Progressbar(){
   return(
 
-    <div className="text-blue-500">
+    <div className="text-blue-500 w-full">
       <MyChart/>
       
     </div>

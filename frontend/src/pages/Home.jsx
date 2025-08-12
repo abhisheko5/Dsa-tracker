@@ -2,7 +2,7 @@ import React from "react";
 import Sidebar from "../components/SidePanel.jsx";
 import Navbar from "../components/Navbar.jsx";
 import Card from "../components/Card.jsx";
-import Progressbar from "../components/Progresschart.jsx";
+import Progressbar from "../components/progresschart.jsx";
 import Donutbar from "../components/Piecharts.jsx";
 import DifficultyStat from '../components/DifficultyStat';
 import CalendarCard from '../components/Calendar';
@@ -15,7 +15,7 @@ const Home=()=>{
 
       <div className="flex flex-col flex-1 bg-gray-100">
         <Navbar />
-        <div className="grid grid-cols-3 gap-6 p-8 items-stretch min-h-[calc(100vh-64px)]">
+        <div className="grid grid-cols-3 grid-rows-2 gap-6 p-8 items-stretch min-h-[calc(100vh-64px)]">
           {/* Donut Chart Card */}
           <Card className="flex items-center justify-center h-[220px] shadow-lg bg-white"> 
             <Donutbar />
@@ -34,17 +34,16 @@ const Home=()=>{
           
 
           {/* Calendar Card */}
-          <Card className="rounded-xl shadow-lg bg-gradient-to-br from-white to-blue-50 flex flex-col items-stretch justify-between h-[600px] min-h-[500px] p-6">
-            <div className="flex-1 flex items-center justify-center">
-              <CalendarCard />
-            </div>
-            <div className="flex-1 flex items-center justify-center">
-              <RecentProblems />
-            </div>
+          <Card className="rounded-xl shadow-lg bg-gradient-to-br from-white to-blue-50 flex  items-center justify-between p-6">
           </Card>
-          <Card className="col-span-1 mt-6 p-4 h-auto bg-gradient-to-r from-indigo-100 to-purple-100 shadow-lg flex items-center justify-center">
+
+          
+          <Card className="col-span-2 p-4 bg-gradient-to-r from-indigo-100 to-purple-100 shadow-lg flex items-center justify-center">
             <Progressbar />
           </Card>
+          <div className="flex-1 flex items-center justify-center">
+              <RecentProblems />
+            </div>
 
           {/* Progress Bar Card - spans 2 columns */}
           
