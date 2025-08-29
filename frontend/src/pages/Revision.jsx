@@ -3,11 +3,15 @@ import React from "react";
 import axios from "axios";
 import Card from "../components/Card.jsx";
 import RevisionTable from '../components/RevisionTable.jsx';
+import toast from 'react-hot-toast';
+
 
 
 const Revision = () => {
 
   const [revisionDue, setRevisionDue] = useState([]);
+  
+
 
   useEffect(()=>{
 
@@ -15,8 +19,23 @@ const Revision = () => {
     try{
     
       const Revisiondue= await axios.get('http://localhost:3000/api/revision/revision-schedule');
-      setRevisionDue(Revisiondue.data.data || []);
-      console.log("Revision Due Problems:", Revisiondue.data);
+      const dueProblems=Revisiondue.data.data || []
+      setRevisionDue(dueProblems);
+      console.log("Revision Due Problems:", dueProblems);
+
+        if (dueProblems.length > 0) {
+          dueProblems.forEach((p) => {
+            const title = p.problem?.title || p.title;
+            toast.success(`Revision due: ${title}`, {
+              duration: 5000,
+              style: {
+                background: '#fef3c7', // light yellow
+                color: '#b45309',       // amber text
+              },
+            });
+          });
+        }
+    
     }
     catch(error){
       console.error("Error fetching revision due problems:", error);

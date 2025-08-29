@@ -1,11 +1,27 @@
 import Card from "../components/Card.jsx";
 import { formatDistanceToNow } from 'date-fns';
+import toast from 'react-hot-toast';
+import axios from 'axios';
+
 
 
 const RevisionTable=({problems})=>{
  if (!problems || !Array.isArray(problems) || problems.length === 0) {
     return <div>No problems available</div>; // or show "No problems available"
   }
+  console.log(problems._id)
+
+    const handleChange=async(id)=>{
+    try{
+    await axios.post(`http://localhost:3000/api/revision/${id}/revisiondone`)
+        toast.success('Revision marked done!');
+    }
+    catch(error){
+      console.error("Error marking revision done",error);
+      toast.error('failed to mark revision done');
+    }
+  }
+
 
 return(
   <div className=" w-full flex flex-col items-center justify-center py-10 px-4">
@@ -36,7 +52,12 @@ return(
         <td className="px-4 py-2">{problem.url}
 
         </td>
-          
+          <td className="px-4 py-2">
+  <button onClick={()=>handleChange(problem.problemNo)}  className="px-2 py-1 bg-green-500 text-white rounded hover:bg-green-600"
+  >
+    Done
+  </button>
+</td>
       </tr>
       ))}
             </tbody>

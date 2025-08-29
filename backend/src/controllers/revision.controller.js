@@ -88,6 +88,7 @@ const result = await ProblemStatus.aggregate([
       title: "$problem.title",
       difficulty: "$problem.difficulty",
       Attempted:"$lastAttempted",
+      problemNo:"$problem.problemNo",
       status:"$status",
       url:"$problem.url"
     }

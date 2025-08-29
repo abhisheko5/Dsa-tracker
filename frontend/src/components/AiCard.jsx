@@ -1,45 +1,76 @@
-import axios from 'axios';
-import React, { useState } from 'react';  
-const AiCard=()=>{
+import axios from "axios";
+import React, { useState } from "react";
 
-  const [prompt,setPrompt]=useState("");
-  const[aiReply,setAiReply]=useState("");
-  const handleInput=async()=>{
-      try{
-        const response = await axios.post('http://localhost:3000/api/problem/hint',{prompt});
-        setAiReply(response.data.aiReply);
-        console.log("AI Reply:", response.data.aiReply);}
-      catch(error){
-        console.error("Error fetching AI response:", error);
-        // 
+const AiCard = () => {
+  const [prompt, setPrompt] = useState("");
+  const [aiReply, setAiReply] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleInput = async () => {
+    if (!prompt.trim()) return; // prevent empty requests
+    setLoading(true);
+    setAiReply(""); // clear previous reply
+    try {
+      const response = await axios.post("http://localhost:3000/api/problem/hint", { prompt });
+      // simulate typing effect
+      let text = response.data.aiReply || "No reply from AI.";
+     let i = 0;
+let currentText = ""; // local variable to build reply
+const interval = setInterval(() => {
+  currentText += text.charAt(i);   // append char to local variable
+  setAiReply(currentText);         // update state with full text so far
+  i++;
+  if (i >= text.length) clearInterval(interval);
+}, 25);
+
+    } catch (error) {
+      console.error("Error fetching AI response:", error);
+      setAiReply("Something went wrong. Try again!");
+    } finally {
+      setLoading(false);
     }
-  }
-
+  };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-      <div className="w-full max-w-xl bg-gray-200 rounded-2xl shadow-lg p-8 flex flex-col items-center gap-4">
-        <h2 className="text-2xl font-bold text-gray-700 mb-2">AI DSA Assistant</h2>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-indigo-50 to-indigo-200 p-4">
+      <div className="w-full max-w-2xl bg-white rounded-3xl shadow-2xl p-8 flex flex-col gap-6 transform hover:scale-105 transition-transform duration-300">
+        <h2 className="text-3xl font-extrabold text-indigo-700 text-center">
+          AI DSA Assistant
+        </h2>
 
-        
-        <div className="w-full p-4 bg-white rounded-xl shadow min-h-[60px] mt-2">
-          <p className="text-gray-700">{aiReply || "AI response will appear here"}</p>
-       
-        
+        {/* AI Response */}
+        <div className="w-full min-h-[120px] p-6 bg-indigo-50 rounded-2xl shadow-inner border border-indigo-200">
+          <p className={`text-gray-800 text-md ${loading ? "animate-pulse" : ""}`}>
+            {aiReply || "Your AI response will appear here..."}
+          </p>
+        </div>
+
+        {/* Input */}
         <input
           value={prompt}
           onChange={(e) => setPrompt(e.target.value)}
           type="text"
-          placeholder="Ask me anything about DSA"
-          className="w-full mt-10 px-4 bg-white py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="Ask me anything about DSA..."
+          className="w-full px-6 py-3 border-2 border-indigo-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 placeholder-gray-400 transition"
+          onKeyDown={(e) => e.key === "Enter" && handleInput()}
         />
-         </div>
+
+        {/* Button */}
         <button
           onClick={handleInput}
-          className=" w-full px-4 py-2 bg-gray-700 text-white rounded-lg font-semibold hover:bg-gray-800 transition"
-        >Ask</button>
+          disabled={loading}
+          className="w-full py-3 bg-indigo-600 text-white font-semibold rounded-xl shadow-lg hover:bg-indigo-700 active:scale-95 transition transform disabled:opacity-50"
+        >
+          {loading ? "Thinking..." : "Ask AI"}
+        </button>
+
+        {/* Footer Tip */}
+        <p className="text-gray-500 text-sm text-center mt-2">
+          Tip: Press Enter or click "Ask AI" to get instant guidance on DSA problems.
+        </p>
       </div>
     </div>
-  )
-}
+  );
+};
+
 export default AiCard;

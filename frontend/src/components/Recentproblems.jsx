@@ -1,45 +1,74 @@
-import React,{useState,useEffect} from "react";
-import axios from "axios";
-import { formatDistanceToNow } from 'date-fns';
+import React from "react";
+import { formatDistanceToNow } from "date-fns";
 
+const RecentProblems = ({recentProblems}) => {
 
-
-
-const RecentProblems = () => {
-
-  const[recentProblems, setRecentProblems]=useState([]);
-
-  useEffect(() => {
-    const fetchRecentProblems = async () => {
-      try{
-        const response = await axios.get('http://localhost:3000/api/status/recentproblems')
-        
-        
-        console.log("response", response);
-        setRecentProblems(response.data?.data || []);
-      }
-      catch(error) {
-        console.error("Error fetching recent problems:", error);
-      }
-    }
-    fetchRecentProblems();
-  },[]);
-  
-  
   return (
-    <div className="w-full h-full flex flex-col items-center justify-start p-2">
-      <h2 className="text-xl font-bold text-indigo-700 mb-2 text-center">Recent Problems</h2>
-      <ul className="w-full divide-y divide-gray-200 overflow-y-auto">
-        {recentProblems.map((problem,index) => (
-          <li key={problem._id || index} className="py-2 flex items-center justify-between">
-            <div>
-              <span className="font-semibold text-gray-800">{problem.title}</span>
-              <span className="ml-2 text-xs text-gray-500">({problem.difficulty})</span>
-            </div>
-            <span className="text-sm text-gray-400">{problem.lastAttempted}</span>
-          </li> 
-        ))}
-      </ul>
+    <div className="w-full h-full flex flex-col p-6 bg-white rounded-xl shadow-lg">
+      <h2 className="text-2xl font-bold text-indigo-700 mb-4 text-center">
+        Recent Problems
+      </h2>
+
+      <div className="overflow-x-auto">
+        <table className="min-w-full border border-gray-200 rounded-lg">
+          <thead className="bg-gray-100 text-gray-700 text-sm">
+            <tr>
+              <th className="px-4 py-2 text-left">Sr</th>
+              <th className="px-4 py-2 text-left">Problem no</th>
+              <th className="px-4 py-2 text-left">Title</th>
+              <th className="px-4 py-2 text-left">Difficulty</th>
+              <th className="px-4 py-2 text-left">Last Updated</th>
+            </tr>
+          </thead>
+          <tbody>
+            {recentProblems.length > 0 ? (
+              recentProblems.map((problem, index) => (
+                <tr
+                  key={problem._id || index}
+                  className="hover:bg-gray-50 border-t text-sm"
+                >
+                  <td className="px-4 py-2 font-medium text-gray-800">
+                    {index+1}
+                  </td>
+                  <td className="px-4 py-2 font-medium text-gray-800">
+                    {problem.problemNo}
+                  </td>
+                  <td className="px-4 py-2 font-semibold text-indigo-600 hover:underline cursor-pointer">
+                    {problem.title}
+                  </td>
+                  <td
+                    className={`px-4 py-2 font-medium ${
+                      problem.difficulty === "Easy"
+                        ? "text-green-600"
+                        : problem.difficulty === "Medium"
+                        ? "text-yellow-600"
+                        : "text-red-600"
+                    }`}
+                  >
+                    {problem.difficulty}
+                  </td>
+                  <td className="px-4 py-2 text-gray-500">
+                    {problem.updatedAt
+                      ? formatDistanceToNow(new Date(problem.updatedAt), {
+                          addSuffix: true,
+                        })
+                      : "—"}
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td
+                  colSpan="4"
+                  className="px-4 py-6 text-center text-gray-500 italic"
+                >
+                  No recent problems found
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

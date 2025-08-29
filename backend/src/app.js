@@ -15,12 +15,14 @@ import problemRoutes from './routes/problem.routes.js';
 import revisionRoutes from './routes/revision.route.js';
 import problemStatusRoutes from './routes/problemStatus.route.js';
 import analyticsRoutes from './routes/analytics.route.js';
+import aiRoutes from './routes/ai.routes.js';
 
 app.use('/api/users', userRoutes);
 app.use('/api/problem', problemRoutes);
 app.use('/api/revision',revisionRoutes);
 app.use('/api/status',problemStatusRoutes);
 app.use('/api/stats',analyticsRoutes);
+app.use('/api/ai',aiRoutes);
 
 
 

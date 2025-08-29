@@ -104,16 +104,13 @@ return res
 };
 
 const getLastSolvedProblems=async(req,res)=>{
-
-
-    const solvedProblems= await ProblemStatus.find({
-    status:"solved"
-    }).populate({
-      path:'problem',
-      select:'title difficulty'
-    })
-    .sort({updatedAt:-1})
-    .limit(5)
+const solvedStatus = await ProblemStatus.find({ status: "solved" });
+const limit = req.query.limit ? parseInt(req.query.limit) : 0; // if no limit, get all
+const solvedProblems = await Problem.find({ problemStatus: solvedStatus._id })
+  .populate("problemStatus","status ")   // fetch full status schema
+  .sort({ updatedAt: -1 })
+  .limit(limit)
+  .select("problemNo title difficulty updatedAt")
     return res
     .status(200)
     .json(

@@ -17,6 +17,9 @@ function Problemtable({ problems }) {
         <th className="px-4 py-2 text-left text-gray-700">Difficulty</th>
         <th className="px-4 py-2 text-left text-gray-700">Topic</th>
         <th className="px-4 py-2 text-left text-gray-700">Status</th>
+        <button>Hi</button>
+        <button>hey</button>
+        <button>hello</button>
       </tr>
     </thead>
     <tbody>
@@ -28,7 +31,7 @@ function Problemtable({ problems }) {
         <td className="px-4 py-2">{problem.topic?.name }</td>
         <td className="px-4 py-2">
           <span className={`inline-block px-3 py-1 rounded-full text-xs font-semibold ${problem.status === 'solved' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
-            {problem.problemstatus?.status || 'Pending'}
+            {problem.problemstatus?.status }
           </span>  
           </td>
       </tr>

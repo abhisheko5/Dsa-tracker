@@ -1,46 +1,53 @@
-import React,{useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import SearchBar from '../components/Searchbar';
 import Problemtable from "../components/Problemtable.jsx";
-import Filter from "../components/Filter.jsx";
+import FilterComponent from "../components/Filter.jsx";
 import axios from 'axios';
 
+const Problems = () => {
+  const [problems, setProblems] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [filters, setFilters] = useState({}); // includes search now
 
-const Problems=()=>{
-  const [problems,setProblems]=useState([]);
-  const[loading,setLoading]=useState(true);
-  const [searchTerm, setSearchTerm] = useState("");
-
-  useEffect(()=>{
-    const fetchProblems=async()=>{
-      try{
-        const response= await axios.get('http://localhost:3000/api/problem/all-problems')
+  useEffect(() => {
+    const fetchProblems = async () => {
+      try {
+        setLoading(true); //
+        const response = await axios.get('http://localhost:3000/api/problem/all-problems', {
+          params: filters, // filters now includes search
+        });
         setProblems(response.data.data || []);
-      } catch(err){
-        console.error("error fetching problems",err);
+      } catch (err) {
+        console.error("Error fetching problems", err);
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     };
 
     fetchProblems();
-  },[]);
+  }, [filters]);
 
-  if(loading) return <p>Loading...</p>
+  if (loading) return <p>Loading...</p>;
 
+  return (
+    <div className="flex h-screen">
+      <div className="flex flex-col flex-1 bg-gray-100 p-5">
+        {/* Search updates filters */}
+        <SearchBar
+          searchTerm={filters.search || ""}
+          setSearchTerm={(value) =>
+            setFilters(prev => ({ ...prev, search: value }))
+          }
+        />
 
-  const filteredProblems = problems.filter((problem) =>
-    problem.title?.toLowerCase().includes(searchTerm.toLowerCase())
+        {/* Filters component updates filters */}
+        <FilterComponent setFilters={setFilters} />
+
+        {/* Use API response directly */}
+        <Problemtable problems={problems} />
+      </div>
+    </div>
   );
-
-  return(
-    <div className=" flex h-screen ">
-      <div className=" flex flex-col flex-1 bg-gray-100 p-5">
-        <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-        <Filter Problems={problems} />
-        <Problemtable problems={filteredProblems}/>
-        
-        </div>
-        </div>
-  )
-}
+};
 
 export default Problems;

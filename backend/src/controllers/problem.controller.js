@@ -152,7 +152,6 @@ const deleteProblem=async(req,res)=>{
 const getallProblems=async(req,res)=>{
   const filter={};
 
-  //filter krdo
 
   if(req.query.difficulty) filter.difficulty=req.query.difficulty;
   if (req.query.topic) {

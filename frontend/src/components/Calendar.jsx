@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Calendar from 'react-calendar';
+import Card from './Card'
 import 'react-calendar/dist/Calendar.css';
 
 function CalendarCard() {
@@ -10,7 +11,7 @@ function CalendarCard() {
       <Calendar
         onChange={setValue}
         value={value}
-        className="rounded-lg shadow-sm w-full"
+        className="rounded-lg shadow-sm !w-full border-none !h-full"
         tileClassName={({ date, view }) =>
           view === 'month' && date.toDateString() === new Date().toDateString()
             ? 'bg-blue-100 text-blue-800 font-semibold rounded-lg'

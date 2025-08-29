@@ -1,19 +1,72 @@
+import React, { useState } from "react";
 
-const Filter=({Problems})=>{
+const FilterComponent = ({ setFilters }) => {
+  const [localFilters, setLocalFilters] = useState({
+    topic: "",
+    difficulty: "",
+    status: "",
+    pattern: ""
+  });
 
-return(
-  <div className="flex items-center justify-between p-4 bg-gray-300 shadow-md rounded-lg">
-    <button className="px-3 pb-1 bg-gray-900 text-white rounded-full hover:bg-gray-500">Array</button>
-    <button className="px-3 pb-1 bg-gray-900 text-white rounded-full hover:bg-gray-500">String</button>
-    <button className="px-3 pb-1 bg-gray-900 text-white rounded-full hover:bg-gray-500">LinkedList</button>
-    <button className="px-3 pb-1 bg-gray-900 text-white rounded-full hover:bg-gray-500">Stack</button>
-    <button className="px-3 pb-1 bg-gray-900 text-white rounded-full hover:bg-gray-500">Queue</button>
-    <button className="px-3 pb-1 bg-gray-900 text-white rounded-full hover:bg-gray-500">Trie</button>
-    <button className="px-3 pb-1 bg-gray-900 text-white rounded-full hover:bg-gray-500">Trees</button>
-    <button className="px-3 pb-1 bg-gray-900 text-white rounded-full hover:bg-gray-500">Graphs</button>
-    <button className="px-3 pb-1 bg-gray-900 text-white rounded-full hover:bg-gray-500">Dp</button>
-    <button className="px-3 pb-1 bg-gray-900 text-white rounded-full hover:bg-gray-500">Binary Search</button>
-</div>
-)
-}
-export default Filter;
+  const filterOptions = {
+    topic: ["Array", "String", "Linked Lists", "Trees", "Graphs", "Dynamic Programming"],
+    difficulty: ["Easy", "Medium", "Hard"],
+    status: ["Solved", "Unsolved", "Attempted"],
+    pattern: ["Two Pointers", "Sliding Window", "Binary Search"]
+  };
+
+  const handleFilterChange = (key, value) => {
+    const updatedFilters = { ...localFilters, [key]: value };
+    setLocalFilters(updatedFilters);
+
+    // Only send non-empty filters to parent
+    const cleanFilters = Object.fromEntries(
+      Object.entries(updatedFilters).filter(([_, v]) => v)
+    );
+    setFilters(cleanFilters);
+  };
+
+  const clearAll = () => {
+    setLocalFilters({ topic: "", difficulty: "", status: "", pattern: "" });
+    setFilters({});
+  };
+
+  return (
+    <div className="bg-white p-4 rounded-lg shadow-md mb-4">
+      <div className="flex justify-between mb-4">
+        <h3 className="text-lg font-medium">Filters</h3>
+        <button
+          onClick={clearAll}
+          className="text-red-500 text-sm hover:underline"
+        >
+          Clear All
+        </button>
+      </div>
+
+      {/* Render simple dropdowns */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        {Object.keys(filterOptions).map((key) => (
+          <div key={key}>
+            <label className="block text-sm font-medium mb-1 capitalize">
+              {key}
+            </label>
+            <select
+              value={localFilters[key]}
+              onChange={(e) => handleFilterChange(key, e.target.value)}
+              className="w-full border rounded px-2 py-1"
+            >
+              <option value="">Select {key}</option>
+              {filterOptions[key].map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default FilterComponent;

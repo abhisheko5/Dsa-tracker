@@ -1,7 +1,7 @@
 import React,{useState} from 'react';
 function Searchbar({searchTerm, setSearchTerm}) {
   return (
-    <div className="flex items-center justify-between p-4 bg-white shadow-md rounded-lg">
+    <div className="flex items-center mb-2 justify-between p-4 bg-white shadow-md rounded-lg">
       <input
         onChange={(e) => setSearchTerm(e.target.value)}
         type="text"

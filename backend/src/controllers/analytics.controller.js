@@ -79,11 +79,10 @@ const getstatsbyTopic=async(req,res)=>{
     }
   ])
 
-  const formatted={};
-  count.forEach(topic=>{
-    formatted[topic._id]=topic.count;
-  });
-
+  const formatted=count.map(topic=>({
+    topic:topic._id,
+    solved:topic.count,
+  }));
   return res
   .status(200)
   .json(
