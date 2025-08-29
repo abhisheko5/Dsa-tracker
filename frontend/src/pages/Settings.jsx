@@ -20,7 +20,7 @@ const Settings = () => {
             </div>
           </div>
 
-          {/* Theme Toggle */}
+
           <div className="flex items-center justify-between">
             <span className="text-gray-700 font-medium">Dark Mode</span>
             <button
@@ -33,7 +33,7 @@ const Settings = () => {
             </button>
           </div>
 
-          {/* Notifications Toggle */}
+        
           <div className="flex items-center justify-between">
             <span className="text-gray-700 font-medium">Notifications</span>
             <button

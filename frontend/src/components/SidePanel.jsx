@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { 
   AiOutlineHome, 
@@ -14,6 +15,19 @@ import {
 
 function Sidebar() {
   const navigate = useNavigate();
+
+  const handleClick=async()=>{
+    try{
+    const response= await axios.post("http://localhost:3000/api/users/logout/",{},{
+      withCredentials:true
+    });
+    console.log(response.data.message);
+    navigate('/')
+  }
+  catch(error){
+    console.log(error);
+  }
+}
 
   const menuItems = [
     { name: 'Dashboard', icon: <AiOutlineHome />, path: '/home' },
@@ -46,7 +60,7 @@ function Sidebar() {
       </div>
 
       <div className="mt-6">
-        <button
+        <button onClick={handleClick}
           className="w-full flex items-center justify-center gap-2 bg-gray-500 hover:bg-red-700 py-2 rounded-lg transition-colors text-white font-semibold"
         >
           <AiOutlineLogout /> Logout

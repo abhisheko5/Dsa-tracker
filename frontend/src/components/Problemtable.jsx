@@ -1,20 +1,22 @@
 import { FaTrash, FaEdit } from "react-icons/fa";
+import axios from 'axios';
+import { toast } from "react-hot-toast";
 
 
 function Problemtable({ problems }) {
 
 
-const handleClick=async()=>{
+const handleClick=async(problemNo)=>{
 try{
-  const deleteproblem=await axios.delete("")
+  const deletedproblem=await axios.delete(`http://localhost:3000/api/problem/delete/${problemNo}`)
+  console.log(deletedproblem);
+  toast.success(deletedproblem.data.message);
 }
+catch(error){
+  console.log(error);
+  toast.error(error.message)
 }
-
-
-
-
-
-
+};
 
    if (!problems || !Array.isArray(problems)) {
     return <div>Loading problems...</div>; 
@@ -44,10 +46,11 @@ try{
             {problem.problemStatus?.status }
           </span>  
           </td>
-        <div className="flex gap-3">
+  
+  <td className="px-4 py-2 flex gap-2">
   <FaEdit className="text-blue-500 hover:text-blue-700 transition" size={18} />
-  <FaTrash className="text-red-500 hover:text-red-700 transition" size={18} />
-</div>
+  <FaTrash onClick={() => handleClick(problem.problemNo)} className="text-red-500 hover:text-red-700 transition" size={18} />
+</td>
       </tr>
       ))}
     </tbody>

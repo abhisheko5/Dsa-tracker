@@ -64,7 +64,8 @@ const loginUser = async(req,res)=>{
   
   const option={
     httpOnly: true,
-    secure: true, 
+  secure: process.env.NODE_ENV === "production", // true only in prod
+    sameSite:"lax",
   }
 
   res
@@ -89,7 +90,9 @@ const logoutUser=async(req,res)=>{
 
     const options = {
         httpOnly:true,
-        secure:true,
+    secure: process.env.NODE_ENV === "production",
+      sameSite: "none",
+
 }
 
 return res

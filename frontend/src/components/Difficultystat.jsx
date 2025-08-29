@@ -34,7 +34,7 @@ const DifficultyStat = () => {
           <h3 className={`font-semibold text-sm ${colorMap[level]}`}>
             {level.charAt(0).toUpperCase() + level.slice(1)}
           </h3>
-          <p className="text-lg font-bold text-gray-800">{count}</p>
+          <p className="text-lg font-bold text-gray-800">{count || 0}</p>
         </div>
       ))}
     </div>
