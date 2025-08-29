@@ -7,14 +7,14 @@ import axios from 'axios';
 const Problems = () => {
   const [problems, setProblems] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [filters, setFilters] = useState({}); // includes search now
+  const [filters, setFilters] = useState({}); 
 
   useEffect(() => {
     const fetchProblems = async () => {
       try {
-        setLoading(true); //
+        setLoading(true); 
         const response = await axios.get('http://localhost:3000/api/problem/all-problems', {
-          params: filters, // filters now includes search
+          params: filters,
         });
         setProblems(response.data.data || []);
       } catch (err) {
@@ -32,7 +32,7 @@ const Problems = () => {
   return (
     <div className="flex h-screen">
       <div className="flex flex-col flex-1 bg-gray-100 p-5">
-        {/* Search updates filters */}
+      
         <SearchBar
           searchTerm={filters.search || ""}
           setSearchTerm={(value) =>
@@ -40,10 +40,8 @@ const Problems = () => {
           }
         />
 
-        {/* Filters component updates filters */}
         <FilterComponent setFilters={setFilters} />
 
-        {/* Use API response directly */}
         <Problemtable problems={problems} />
       </div>
     </div>

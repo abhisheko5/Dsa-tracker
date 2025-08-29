@@ -53,14 +53,22 @@ if(pattern){
 if(url) problemData.url=url;
 if(platform) problemData.platform=platform;
 
-const problem =new Problem(problemData)
-await ProblemStatus.create({
-  problem: problem._id,
-  status: problemStatus,
-  lastAttempted: null
-});
-await problem.save();
+const problem = new Problem(problemData);
+  await problem.save();
 
+   let problemStatusDoc = null;
+
+  // 2️⃣ Create ProblemStatus if provided
+  if (problemStatus) {
+    problemStatusDoc = await ProblemStatus.create({
+      problem: problem._id, // reference to problem
+      status: problemStatus,
+      lastAttempted: null
+    });
+
+    // 3️⃣ Update problem with reference to ProblemStatus
+    problem.problemStatus = problemStatusDoc._id;
+    await problem.save();
 
 
 return res
@@ -69,6 +77,7 @@ return res
   new ApiResponse(200,problem,"new problem added successfully")
 )
 };
+}
 
 const updateProblem=async(req,res)=>{
   const {problemNo}=req.params;
@@ -152,7 +161,6 @@ const deleteProblem=async(req,res)=>{
 const getallProblems=async(req,res)=>{
   const filter={};
 
-
   if(req.query.difficulty) filter.difficulty=req.query.difficulty;
   if (req.query.topic) {
       const topicDoc = await Topic.findOne({ name: req.query.topic });
@@ -172,11 +180,14 @@ const getallProblems=async(req,res)=>{
       filter.problemStatus = statusDoc._id;
     }
 
+
+
   const problems=await Problem.find(filter)
   .populate('topic','name -_id')
   .populate('pattern','name -_id')
   .populate('problemStatus','status')
-  .lean();
+  
+  console.log(problems);
 
   if(problems.length==0){
     throw new ApiError(404,"no problem found");
@@ -211,4 +222,4 @@ const getsingleProblem=async(req,res)=>{
 
 
 
-export{addProblem,updateProblem,deleteProblem,getallProblems,getsingleProblem};
+export {addProblem,updateProblem,deleteProblem,getallProblems,getsingleProblem};

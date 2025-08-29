@@ -31,4 +31,17 @@ catch(error){
   }
 }
 
-export {getDSAResponse,generaterandomProblems};
+const  generateQuote=async(req,res)=>{
+  try{
+    const prompt="create a random quote of motivation in shortand unique quote everytime"
+    const aiReply=await askOpenAI(prompt);
+
+    return res.json(aiReply);
+  }
+  catch(error){
+    console.error("ai error",error.message);
+    res.status(500).json({error:"failed to get Ai response"})
+  }
+}
+
+export {getDSAResponse,generaterandomProblems,generateQuote};

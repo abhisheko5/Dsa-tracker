@@ -15,6 +15,7 @@ import WeakTopicsChart from '../components/TopicWiseGraph'
 
 const Home = () => {
   const [recentProblems, setRecentProblems] = useState([]);
+  const[quote,setQuote]= useState();
 
   useEffect(() => {
     const fetchRecentProblems = async () => {
@@ -26,7 +27,19 @@ const Home = () => {
       }
     };
 
+    const generateQuote= async()=>{
+      try{
+        const response= await axios.post('http://localhost:3000/api/ai/Quote')
+        const cleanedQuote=JSON.parse(response.data)
+        setQuote(cleanedQuote)
+      }
+      catch(error){
+        console.error("error generating quote:",error);
+      }
+    }
+
     fetchRecentProblems();
+    generateQuote();
   }, []);
 
   return (
@@ -45,9 +58,9 @@ const Home = () => {
             </Card>
             <Card className="flex flex-col items-center justify-center p-4 h-[170px] bg-white shadow-md">
               <h1 className="text-xl font-bold text-gray-700 text-center">
-                "Consistency is what transforms average into excellence."
+                {quote || "loading quote"}
               </h1>
-              <p className="text-sm text-gray-500 mt-2 text-center">— Anonymous</p>
+              <p className="text-sm text-gray-500 mt-2 text-center">— Abhishek</p>
             </Card>
           </div>
             
