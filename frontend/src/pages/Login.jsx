@@ -23,6 +23,7 @@ import { useNavigate } from 'react-router-dom';
         password:isPassword
       })
       console.log(onSubmit.data);
+      console.log(onSubmit.data);
       setIsLoggedIn(true);
       toast.success(onSubmit.data.message)
 
