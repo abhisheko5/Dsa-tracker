@@ -3,13 +3,11 @@ import Sidebar from "../components/SidePanel.jsx";
 import Navbar from "../components/Navbar.jsx";
 import Card from "../components/Card.jsx";
 import Progressbar from "../components/progresschart.jsx";
-import Donutbar from "../components/Piecharts.jsx";
 import DifficultyStat from '../components/DifficultyStat.jsx';
 import CalendarCard from '../components/Calendar.jsx';
 import RecentProblems from '../components/Recentproblems.jsx';
 import TotalProgress from '../components/TotalProgress.jsx';
 import Chatbot from '../components/Chatbot.jsx';
-import TotalChart from '../components/RadarChart.jsx';
 
 
 const Home=()=>{
