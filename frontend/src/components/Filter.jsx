@@ -9,10 +9,10 @@ const FilterComponent = ({ setFilters }) => {
   });
 
   const filterOptions = {
-    topic: ["Array", "String", "Linked Lists", "Trees", "Graphs", "Dynamic Programming"],
+    topic: ["Array", "String", "Linked List", "Tree","Stack","Graph","Greedy","Binary Search","Heap","Queue","Recursion"],
     difficulty: ["Easy", "Medium", "Hard"],
     status: ["Solved", "Unsolved", "Attempted"],
-    pattern: ["Two Pointers", "Sliding Window", "Binary Search"]
+    pattern: ["Two Pointers", "Sliding Window","Binary Search","Prefix Sum","Dynamic Programming","Monotonic Stack"]
   };
 
   const handleFilterChange = (key, value) => {

@@ -34,7 +34,14 @@ const RecentProblems = ({recentProblems}) => {
                     {problem.problemNo}
                   </td>
                   <td className="px-4 py-2 font-semibold text-indigo-600 hover:underline cursor-pointer">
-                    {problem.title}
+                   <a
+      href={problem.url}   
+      target="_blank"      
+      rel="noopener noreferrer"
+      className="text-blue-600 hover:underline font-semibold"
+    >
+      {problem.title}
+    </a>
                   </td>
                   <td
                     className={`px-4 py-2 font-medium ${

@@ -1,10 +1,30 @@
 import { useState } from 'react';
 import Calendar from 'react-calendar';
-import Card from './Card'
+import axios from 'axios';
 import 'react-calendar/dist/Calendar.css';
 
 function CalendarCard() {
   const [value, setValue] = useState(new Date());
+  const [hoverData, setHoverData] = useState({}); // store solved problems per date
+
+  // Function to fetch solved problems for a given date
+  const fetchSolvedForDate = async (date) => {
+    const dateStr = date.toISOString().split('T')[0];
+    // Avoid refetching if we already have data
+    if (hoverData[dateStr]) return;
+
+    try {
+      const res = await axios.get(
+        `http://localhost:3000/api/status/solvedproblems?date=${dateStr}`
+      );
+      setHoverData((prev) => ({
+        ...prev,
+        [dateStr]: res.data.data.map((p) => p.problem.title),
+      }));
+    } catch (err) {
+      console.error("Error fetching solved problems for date:", dateStr, err);
+    }
+  };
 
   return (
     <div className="flex flex-col items-center justify-center w-full h-full">
@@ -12,11 +32,24 @@ function CalendarCard() {
         onChange={setValue}
         value={value}
         className="rounded-lg shadow-sm !w-full border-none !h-full"
-        tileClassName={({ date, view }) =>
-          view === 'month' && date.toDateString() === new Date().toDateString()
-            ? 'bg-blue-100 text-blue-800 font-semibold rounded-lg'
-            : ''
-        }
+        tileContent={({ date, view }) => {
+          if (view === 'month') {
+            const dateStr = date.toISOString().split('T')[0];
+            const problems = hoverData[dateStr];
+
+            if (problems?.length) {
+              return (
+                <div
+                  className="text-center mt-1"
+                  onMouseEnter={() => fetchSolvedForDate(date)}
+                  title={problems.join(', ')} // Hover tooltip
+                >
+                  <span className="bg-blue-500 w-2 h-2 rounded-full inline-block"></span>
+                </div>
+              );
+            }
+          }
+        }}
       />
     </div>
   );

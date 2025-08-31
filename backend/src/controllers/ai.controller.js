@@ -14,7 +14,7 @@ const getDSAResponse=async(req,res)=>{
 }
 const generaterandomProblems=async(req,res)=>{
 try{
-  const prompt="create five random problems of dsa of different topics and difficulty only problems"
+  const prompt="Create exactly five random DSA problems. Only provide the problem statements, do NOT include difficulty, topic, or numbering. Output each problem on a new line."
   const aiReply=await askOpenAI(prompt);
 
  const numberedItems = aiReply

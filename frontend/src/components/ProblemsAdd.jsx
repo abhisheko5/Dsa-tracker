@@ -103,11 +103,15 @@ const ProblemForm = () => {
           <option value="Stack">Stack</option>
           <option value="queue">Queue</option>
           <option value="graph">Graph</option>
-          <option value="tree">Trees</option>
+          <option value="tree">Tree</option>
           <option value="hashmap">Hashmap</option>
+          <option value="hashmap">Binary Search</option>
           <option value="set">Set</option>
           <option value="heap">Heap</option>
           <option value="trie">Trie</option>
+          <option value="trie">Backtracking</option>
+          <option value="trie">Recursion</option>
+          <option value="trie">Dynamic Programming</option>
         </select>
       </div>
 

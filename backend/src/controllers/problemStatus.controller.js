@@ -103,20 +103,27 @@ return res
 )
 };
 
-const getLastSolvedProblems=async(req,res)=>{
-const solvedStatus = await ProblemStatus.find({ status: "solved" });
-const limit = req.query.limit ? parseInt(req.query.limit) : 0; // if no limit, get all
-const solvedProblems = await Problem.find({ problemStatus: solvedStatus._id })
-  .populate("problemStatus","status ")   // fetch full status schema
-  .sort({ updatedAt: -1 })
-  .limit(limit)
-  .select("problemNo title difficulty updatedAt")
-    return res
-    .status(200)
-    .json(
-      new ApiResponse(200,solvedProblems,"last 5 problems fetched")
-    )
-}
+const getLastSolvedProblems = async (req, res) => {
+  try {
+    const solvedStatus = await ProblemStatus.find({ status: "solved" });
+    const solvedIds = solvedStatus.map(s => s._id);
+
+    const limit = req.query.limit ? parseInt(req.query.limit) : 0;
+
+    const solvedProblems = await Problem.find({ problemStatus: { $in: solvedIds } })
+      .populate("problemStatus", "status") 
+      .sort({ updatedAt: -1 })
+      .limit(limit)
+      .select("problemNo title difficulty updatedAt");
+
+    return res.status(200).json(
+      new ApiResponse(200, solvedProblems, "Last solved problems fetched")
+    );
+  } catch (err) {
+    return res.status(500).json(new ApiResponse(500, null, err.message));
+  }
+};
+
 
 const addOneliner =async(req,res)=>{
   const{ProblemNo}=req.params;
@@ -142,4 +149,33 @@ const addOneliner =async(req,res)=>{
       new ApiResponse(200,status,"one liner added successfully")
     )
 }
-export {markproblemStatus,getProblemstats,getproblemProgress,addOneliner,getLastSolvedProblems};
+
+const getperdayproblemsolved = async (req, res) => {
+  try {
+    const { date } = req.query;
+
+    if (!date) {
+      throw new ApiError(400, "Please provide a date");
+    }
+
+    const startOfDay = new Date(date);
+    startOfDay.setHours(0, 0, 0, 0);
+
+    const endOfDay = new Date(date);
+    endOfDay.setHours(23, 59, 59, 999);
+
+
+    const problems = await ProblemStatus.find({
+      status: "solved",
+      updatedAt: { $gte: startOfDay, $lte: endOfDay } // assuming you have a `solvedAt` field
+    }).populate('problem','title')
+
+    return res.status(200).json(
+      new ApiResponse(200, problems, "Solved problems for the day")
+    );
+  } catch (err) {
+    return res.status(500).json(new ApiResponse(500, null, err.message));
+  }
+};
+
+export {markproblemStatus,getProblemstats,getproblemProgress,addOneliner,getLastSolvedProblems,getperdayproblemsolved};

@@ -6,78 +6,68 @@ import Pattern from '../models/pattern.model.js';
 import {ApiError} from '../utils/apiError.js';
 import {ApiResponse} from "../utils/apiResponse.js"
 
-const addProblem=async(req,res)=>{
-  console.log(req.body);
+const addProblem = async (req, res) => {
+  const { title, difficulty, pattern, topic, problemStatus, url, platform, problemNo } = req.body;
 
-  
-  const{title,
-difficulty,
-pattern,
-topic,
-problemStatus,
-url,
-platform,problemNo}=req.body;
+  if (!title || !difficulty || !topic || !problemNo) {
+    throw new ApiError(400, "Please provide minimum details for problem");
+  }
 
-if(!title || !difficulty || !topic || !problemNo){
-  throw new ApiError(400,"please provided min details for problem");
-}
+  const existingProblem = await Problem.findOne({
+    $or: [{ title }, { problemNo }],
+  });
 
-const existingproblem= await Problem.findOne({
-  $or:[
-    {title :title},
-    {problemNo:problemNo}]
+  if (existingProblem) throw new ApiError(400, "Problem already exists");
 
-});
+  const problemData = { title, difficulty, problemNo };
 
-if(existingproblem){
-  throw new ApiError(400,"problem already exists");
-}
+  const topicDoc = await Topic.findOne({ name: topic });
+  if (!topicDoc) throw new ApiError(404, `Topic ${topic} not found`);
+  problemData.topic = topicDoc._id;
 
-const problemData={
-title,
-difficulty,
-problemNo,
-}
+  if (pattern) {
+    const patternDoc = await Pattern.findOne({ name: pattern });
+    if (!patternDoc) throw new ApiError(404, `Pattern ${pattern} not found`);
+    problemData.pattern = patternDoc._id;
+  }
 
-  const topicDoc=await Topic.findOne({name:topic});
-  if(!topicDoc) throw new ApiError(404,`topic ${topic} not found`);
-  problemData.topic=topicDoc._id;
+  if (url) problemData.url = url;
+  if (platform) problemData.platform = platform;
 
-
-if(pattern){
-  const patternDoc=await Pattern.findOne({name:pattern});
-  if(!patternDoc) throw new ApiError(404,`pattern ${pattern} not found`);
-  problemData.pattern=patternDoc._id;
-}
-
-if(url) problemData.url=url;
-if(platform) problemData.platform=platform;
-
-const problem = new Problem(problemData);
+  const problem = new Problem(problemData);
   await problem.save();
 
-   let problemStatusDoc = null;
+  let problemStatusDoc = null;
 
-  // 2️⃣ Create ProblemStatus if provided
   if (problemStatus) {
-    problemStatusDoc = await ProblemStatus.create({
-      problem: problem._id, // reference to problem
-      status: problemStatus,
-      lastAttempted: null
-    });
+    if (problemStatus === "solved") {
+      const today = new Date();
+      const Revisions = [0, 3, 7, 14, 30];
+      problemStatusDoc = await ProblemStatus.create({
+        problem: problem._id,
+        status: problemStatus,
+        lastAttempted: new Date(),
+        revisionDate: Revisions.map((days) => {
+          const date = new Date(today);
+          date.setDate(date.getDate() + days);
+          return date;
+        }),
+      });
+    } else {
+      problemStatusDoc = await ProblemStatus.create({
+        problem: problem._id,
+        status: problemStatus,
+        lastAttempted: null,
+      });
+    }
 
-    // 3️⃣ Update problem with reference to ProblemStatus
     problem.problemStatus = problemStatusDoc._id;
     await problem.save();
+  }
 
-
-return res
-.status(201)
-.json(
-  new ApiResponse(200,problem,"new problem added successfully")
-)
+  return res.status(201).json(new ApiResponse(201, problem, "New problem added successfully"));
 };
-}
+
 
 const updateProblem=async(req,res)=>{
   const {problemNo}=req.params;
@@ -154,7 +144,7 @@ const deleteProblem=async(req,res)=>{
   return res
   .status(200)
   .json(
-    new ApiResponse(200,deletedproblem,"problemdeletedsuccessfully")
+    new ApiResponse(200,deletedproblem,"problem deleted successfully")
   )
 }
 

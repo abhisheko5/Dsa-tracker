@@ -18,7 +18,7 @@ function Sidebar() {
 
   const handleClick=async()=>{
     try{
-    const response= await axios.post("http://localhost:3000/api/users/logout/",{},{
+    const response= await axios.post("http://localhost:3000/api/users/logout",{},{
       withCredentials:true
     });
     console.log(response.data.message);

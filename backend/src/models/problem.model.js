@@ -1,6 +1,11 @@
 import mongoose from 'mongoose';
 
 const ProblemSchema=new mongoose.Schema({
+   user:{
+    type:mongoose.Schema.Types.ObjectId,
+      ref:'User'    
+    },
+  
   problemNo:{
     type:Number,
     required:true,

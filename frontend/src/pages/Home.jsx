@@ -10,7 +10,6 @@ import CalendarCard from '../components/Calendar';
 import RecentProblems from '../components/Recentproblems.jsx';
 import TotalProgress from '../components/TotalProgress.jsx';
 import Chatbot from '../components/Chatbot.jsx';
-import TotalChart from '../components/RadarChart.jsx';
 import WeakTopicsChart from '../components/TopicWiseGraph'
 
 const Home = () => {
@@ -36,7 +35,7 @@ const Home = () => {
       catch(error){
         console.error("error generating quote:",error);
       }
-    }
+    };
 
     fetchRecentProblems();
     generateQuote();

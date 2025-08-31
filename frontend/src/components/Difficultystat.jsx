@@ -1,25 +1,29 @@
-import React from 'react';
-import { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-const DifficultyStat = () => {
 
-  const [difficultyData, setDifficultyData] = useState({});
+const DifficultyStat = () => {
+  const [difficultyData, setDifficultyData] = useState({
+    Easy: 0,
+    Medium: 0,
+    Hard: 0,
+  });
 
   useEffect(() => {
     const fetchDifficultyData = async () => {
-        
-      try{
-      
-      const response= await axios.get('http://localhost:3000/api/stats/getstatsbydiff');
-        setDifficultyData(response.data.data || {});
-    
+      try {
+        const response = await axios.get('http://localhost:3000/api/stats/getstatsbydiff');
+        // Merge with default values to ensure all levels exist
+        setDifficultyData(prev => ({
+          Easy: response.data.data?.Easy || 0,
+          Medium: response.data.data?.Medium || 0,
+          Hard: response.data.data?.Hard || 0,
+        }));
+      } catch (error) {
+        console.log(error);
       }
-  catch(error){
-    console.log(error);
-  }
-}
-  fetchDifficultyData()
-},[])
+    };
+    fetchDifficultyData();
+  }, []);
 
   const colorMap = {
     Easy: 'text-green-500',
@@ -32,9 +36,9 @@ const DifficultyStat = () => {
       {Object.entries(difficultyData).map(([level, count]) => (
         <div key={level}>
           <h3 className={`font-semibold text-sm ${colorMap[level]}`}>
-            {level.charAt(0).toUpperCase() + level.slice(1)}
+            {level}
           </h3>
-          <p className="text-lg font-bold text-gray-800">{count || 0}</p>
+          <p className="text-lg font-bold text-gray-800">{count}</p>
         </div>
       ))}
     </div>

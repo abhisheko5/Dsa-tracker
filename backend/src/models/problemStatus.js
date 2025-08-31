@@ -36,6 +36,8 @@ const ProblemstatusSchema= new mongoose.Schema({
   intuition:{
     type:String
   }
+},{
+  timestamps:true
 })
 
 const ProblemStatus=mongoose.model("ProblemStatus",ProblemstatusSchema);
