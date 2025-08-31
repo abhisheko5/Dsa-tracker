@@ -15,7 +15,7 @@ function CalendarCard() {
 
     try {
       const res = await axios.get(
-        `http://localhost:3000/api/status/solvedproblems?date=${dateStr}`
+        `https://dsa-tracker-nh8t.onrender.com/api/status/solvedproblems?date=${dateStr}`
       );
       setHoverData((prev) => ({
         ...prev,

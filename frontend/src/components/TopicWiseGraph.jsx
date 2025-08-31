@@ -10,7 +10,7 @@ export default function WeakTopicsChart() {
   useEffect(() => {
     const getProblems = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/stats/getstatsbytopic");
+        const response = await axios.get("https://dsa-tracker-nh8t.onrender.com/api/stats/getstatsbytopic");
         let sortedData = response.data.data.sort((a, b) => a.solved - b.solved); // weakest first
         setTopics(sortedData);
       } catch (error) {

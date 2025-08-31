@@ -13,7 +13,7 @@ const RevisionTable=({problems})=>{
 
     const handleChange=async(id)=>{
     try{
-    await axios.post(`http://localhost:3000/api/revision/${id}/revisiondone`)
+    await axios.post(`https://dsa-tracker-nh8t.onrender.com/api/revision/${id}/revisiondone`)
         toast.success('Revision marked done!');
     }
     catch(error){

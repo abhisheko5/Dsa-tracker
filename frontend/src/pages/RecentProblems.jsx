@@ -8,7 +8,7 @@ const RecentProblemsPage = () => {
   useEffect(() => {
     const fetchRecentProblems = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/status/recentproblems");
+        const response = await axios.get("https://dsa-tracker-nh8t.onrender.com/api/status/recentproblems");
         setRecentProblems(response.data?.data || []);
       } catch (error) {
         console.error("Error fetching recent problems:", error);

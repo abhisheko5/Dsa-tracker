@@ -18,7 +18,7 @@ const Revision = () => {
     const fetchRevisionDue = async () => {
     try{
     
-      const Revisiondue= await axios.get('http://localhost:3000/api/revision/revision-schedule');
+      const Revisiondue= await axios.get('https://dsa-tracker-nh8t.onrender.com/api/revision/revision-schedule');
       const dueProblems=Revisiondue.data.data || []
       setRevisionDue(dueProblems);
       console.log("Revision Due Problems:", dueProblems);

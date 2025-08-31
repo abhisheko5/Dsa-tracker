@@ -7,18 +7,18 @@ const AiCard = () => {
   const [loading, setLoading] = useState(false);
 
   const handleInput = async () => {
-    if (!prompt.trim()) return; // prevent empty requests
+    if (!prompt.trim()) return; 
     setLoading(true);
-    setAiReply(""); // clear previous reply
+    setAiReply(""); 
     try {
-      const response = await axios.post("http://localhost:3000/api/problem/hint", { prompt });
-      // simulate typing effect
+      const response = await axios.post("https://dsa-tracker-nh8t.onrender.com/api/problem/hint", { prompt });
+
       let text = response.data.aiReply || "No reply from AI.";
      let i = 0;
-let currentText = ""; // local variable to build reply
+let currentText = ""; 
 const interval = setInterval(() => {
-  currentText += text.charAt(i);   // append char to local variable
-  setAiReply(currentText);         // update state with full text so far
+  currentText += text.charAt(i);  
+  setAiReply(currentText);         
   i++;
   if (i >= text.length) clearInterval(interval);
 }, 25);

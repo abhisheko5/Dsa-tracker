@@ -11,7 +11,7 @@ const DifficultyStat = () => {
   useEffect(() => {
     const fetchDifficultyData = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/api/stats/getstatsbydiff');
+        const response = await axios.get('https://dsa-tracker-nh8t.onrender.com/api/stats/getstatsbydiff');
         // Merge with default values to ensure all levels exist
         setDifficultyData(prev => ({
           Easy: response.data.data?.Easy || 0,

@@ -18,7 +18,7 @@ import { useNavigate } from 'react-router-dom';
     e.preventDefault();
 
     try{
-      const onSubmit=await axios.post("http://localhost:3000/api/users/login",{
+      const onSubmit=await axios.post("https://dsa-tracker-nh8t.onrender.com/api/users/login",{
         email:isEmail,
         password:isPassword
       })
@@ -43,7 +43,7 @@ toast.error(error.response?.data?.message || "Login failed")
     e.preventDefault();
 
     try{
-      const onSubmit=await axios.post("http://localhost:3000/api/users/register",{
+      const onSubmit=await axios.post("https://dsa-tracker-nh8t.onrender.com/api/users/register",{
         name:isName,
         email:isEmail,
         password:isPassword
