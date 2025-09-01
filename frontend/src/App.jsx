@@ -5,9 +5,9 @@ import NotesPage from './pages/NotesPage.jsx';
 import { Toaster } from 'react-hot-toast';
 import Home from './pages/home.jsx'
 import ChatwithAi from './pages/Ai.jsx'
-import Problems from './pages/problems.jsx'
+import Problems from './pages/Problems.jsx'
 import AddProblem from './pages/AddProblem.jsx'
-import Revision from './pages/revision.jsx'
+import Revision from './pages/Revision.jsx'
 import Recentsolved from './pages/RecentProblems.jsx'
 
 
