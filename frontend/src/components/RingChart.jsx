@@ -1,5 +1,5 @@
 import { PieChart, Pie, Cell, Label } from "recharts";
-import api from "./api/axios";  // use this instead of raw axios
+import api from "../api/axios";
 
 import { useEffect, useState } from "react";
 

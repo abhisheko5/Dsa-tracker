@@ -3,7 +3,7 @@ import SearchBar from '../components/Searchbar';
 import Problemtable from "../components/Problemtable.jsx";
 import FilterComponent from "../components/Filter.jsx";
 import axios from 'axios';
-import api from "./api/axios";  // use this instead of raw axios
+import api from "../api/axios";
 
 
 const Problems = () => {

@@ -2,7 +2,7 @@ import {
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, LabelList,Cell
 } from "recharts";
 import React, { useState, useEffect } from "react";
-import api from "./api/axios";  // use this instead of raw axios
+import api from "../api/axios";
 
 
 export default function WeakTopicsChart() {

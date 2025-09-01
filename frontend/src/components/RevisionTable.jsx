@@ -1,7 +1,7 @@
 import Card from "../components/Card.jsx";
 import { formatDistanceToNow } from 'date-fns';
 import toast from 'react-hot-toast';
-import api from "./api/axios";  // use this instead of raw axios
+import api from "../api/axios";
 
 
 

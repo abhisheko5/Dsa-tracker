@@ -1,5 +1,5 @@
 import React from "react";
-import api from "./api/axios";  // use this instead of raw axios
+import api from "../api/axios";
 
 import { useProblemContext } from "../context/ProblemContext";
 

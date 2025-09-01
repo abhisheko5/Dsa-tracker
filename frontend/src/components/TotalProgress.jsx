@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import api from "./api/axios";  // use this instead of raw axios
+import api from "../api/axios";
 
 
 const TotalProgress=()=> {

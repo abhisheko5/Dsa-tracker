@@ -1,7 +1,7 @@
 import {useState, useEffect} from "react";
 import React from "react";
 import axios from "axios";
-import api from "./api/axios";  // use this instead of raw axios
+import api from "../api/axios";
 
 import Card from "../components/Card.jsx";
 import RevisionTable from '../components/RevisionTable.jsx';

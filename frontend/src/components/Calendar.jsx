@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Calendar from 'react-calendar';
-import api from "./api/axios";  // use this instead of raw axios
+import api from "../api/axios";
 
 import 'react-calendar/dist/Calendar.css';
 
