@@ -11,7 +11,7 @@ export default function RingChart() {
   useEffect(() => {
     const getstats = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/stats/getstats");
+        const response = await axios.get("https://dsa-tracker-nh8t.onrender.com/api/stats/getstats");
         console.log("API Response:", response.data);
 
         const solved = response.data.data.solved ?? 0;
