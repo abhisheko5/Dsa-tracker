@@ -11,7 +11,7 @@ import Revision from './pages/Revision.jsx'
 import Recentsolved from './pages/RecentProblems.jsx'
 
 
-import Settings from './pages/settings.jsx'
+import Settings from './pages/Settings.jsx'
 import {Routes, Route} from 'react-router-dom'
 
 import './App.css'
