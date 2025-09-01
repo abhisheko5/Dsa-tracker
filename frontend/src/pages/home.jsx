@@ -19,7 +19,7 @@ const Home=()=>{
         <div className="grid grid-cols-3 grid-rows-2 gap-6 p-8 items-stretch min-h-[calc(100vh-64px)]">
           {/* Donut Chart Card */}
           <Card className="flex items-center justify-center h-[220px] shadow-lg bg-white"> 
-            <Donutbar />
+          
           </Card>
 
           {/* Difficulty and Quote */}
