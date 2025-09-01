@@ -1,5 +1,6 @@
 import React from 'react';
-import axios from 'axios';
+import api from "./api/axios";  // use this instead of raw axios
+
 import { useNavigate } from 'react-router-dom';
 import { 
   AiOutlineHome, 
@@ -18,7 +19,7 @@ function Sidebar() {
 
   const handleClick=async()=>{
     try{
-    const response= await axios.post("https://dsa-tracker-nh8t.onrender.com/api/users/logout",{},{
+    const response= await api.post("/api/users/logout",{},{
       withCredentials:true
     });
     console.log(response.data.message);

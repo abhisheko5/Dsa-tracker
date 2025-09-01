@@ -1,5 +1,6 @@
 import React from "react";
-import axios from 'axios';
+import api from "./api/axios";  // use this instead of raw axios
+
 import { useProblemContext } from "../context/ProblemContext";
 
 
@@ -24,7 +25,7 @@ const ProblemUpdateForm = () => {
     }
 
     try{
-      const response= await axios.post('https://dsa-tracker-nh8t.onrender.com/api/problem/update',problemData);
+      const response= await api.post('/api/problem/update',problemData);
     console.log("response",response.data);
     setproblems(prevProblems => [...prevProblems, response.data.data]);
   }

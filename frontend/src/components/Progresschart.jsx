@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import api from "./api/axios";  // use this instead of raw axios
+
 import {
   LineChart,
   Line,
@@ -9,7 +11,6 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-import axios from "axios";
 
 const MyChart = () => {
   const [data, setData] = useState([]);
@@ -17,8 +18,8 @@ const MyChart = () => {
   useEffect(() => {
     const getProgressData = async () => {
       try {
-        const response = await axios.get(
-          `https://dsa-tracker-nh8t.onrender.com/api/stats/getstatsbytopic`
+        const response = await api.get(
+          `/api/stats/getstatsbytopic`
         );
 
         // ✅ Map backend data (topic → X-axis, solved → Y-axis)

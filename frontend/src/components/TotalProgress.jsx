@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import api from "./api/axios";  // use this instead of raw axios
+
 
 const TotalProgress=()=> {
 
@@ -9,7 +10,7 @@ const [solvedProblems, setSolvedProblems] = useState(0);
 useEffect(() => {
 const fetchTotalProgress = async () => {
 try{
-  const response = await axios.get('https://dsa-tracker-nh8t.onrender.com/api/status/progress');
+  const response = await api.get('/api/status/progress');
   console.log("Total Progress Response:", response.data);
   if (response.data && response.data.success) {
     setTotalProblems(response.data.data.totalProblems || 0);

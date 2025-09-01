@@ -1,7 +1,8 @@
 import Card from "../components/Card.jsx";
 import { formatDistanceToNow } from 'date-fns';
 import toast from 'react-hot-toast';
-import axios from 'axios';
+import api from "./api/axios";  // use this instead of raw axios
+
 
 
 
@@ -13,7 +14,7 @@ const RevisionTable=({problems})=>{
 
     const handleChange=async(id)=>{
     try{
-    await axios.post(`https://dsa-tracker-nh8t.onrender.com/api/revision/${id}/revisiondone`)
+    await api.post(`/api/revision/${id}/revisiondone`)
         toast.success('Revision marked done!');
     }
     catch(error){

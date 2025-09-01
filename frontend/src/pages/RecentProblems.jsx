@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import api from "./api/axios";  // use this instead of raw axios
+
 import RecentProblems from "../components/Recentproblems";
 
 const RecentProblemsPage = () => {
@@ -8,7 +10,7 @@ const RecentProblemsPage = () => {
   useEffect(() => {
     const fetchRecentProblems = async () => {
       try {
-        const response = await axios.get("https://dsa-tracker-nh8t.onrender.com/api/status/recentproblems");
+        const response = await api.get("/api/status/recentproblems");
         setRecentProblems(response.data?.data || []);
       } catch (error) {
         console.error("Error fetching recent problems:", error);

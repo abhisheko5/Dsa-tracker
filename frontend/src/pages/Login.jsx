@@ -1,5 +1,7 @@
   import React,{useState} from 'react';
   import axios from 'axios';
+  import api from "./api/axios";  // use this instead of raw axios
+
   import { toast } from "react-hot-toast";
   import { useNavigate } from 'react-router-dom';
 axios.defaults.withCredentials = true;
@@ -18,7 +20,7 @@ axios.defaults.withCredentials = true;
       e.preventDefault();
 
       try{
-        const onSubmit=await axios.post("https://dsa-tracker-nh8t.onrender.com/api/users/login",{
+        const onSubmit=await api.post("/api/users/login",{
           email:isEmail,
           password:isPassword
         })

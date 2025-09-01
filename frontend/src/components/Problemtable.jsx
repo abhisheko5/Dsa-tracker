@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { FaTrash, FaEdit } from "react-icons/fa";
-import axios from "axios";
+import api from "./api/axios";  // use this instead of raw axios
+
 import { toast } from "react-hot-toast";
 
 function Problemtable({ problems: initialProblems }) {
@@ -12,8 +13,8 @@ function Problemtable({ problems: initialProblems }) {
 
   const handleClick = async (problemNo) => {
     try {
-      const deletedProblem = await axios.delete(
-        `https://dsa-tracker-nh8t.onrender.com/api/problem/delete/${problemNo}`
+      const deletedProblem = await api.delete(
+        `/api/problem/delete/${problemNo}`
       );
 
     

@@ -1,6 +1,8 @@
 import {useState, useEffect} from "react";
 import React from "react";
 import axios from "axios";
+import api from "./api/axios";  // use this instead of raw axios
+
 import Card from "../components/Card.jsx";
 import RevisionTable from '../components/RevisionTable.jsx';
 import toast from 'react-hot-toast';
@@ -18,7 +20,7 @@ const Revision = () => {
     const fetchRevisionDue = async () => {
     try{
     
-      const Revisiondue= await axios.get('https://dsa-tracker-nh8t.onrender.com/api/revision/revision-schedule');
+      const Revisiondue= await api.get('/api/revision/revision-schedule');
       const dueProblems=Revisiondue.data.data || []
       setRevisionDue(dueProblems);
       console.log("Revision Due Problems:", dueProblems);

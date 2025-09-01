@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from "./api/axios";  // use this instead of raw axios
+
 
 const DifficultyStat = () => {
   const [difficultyData, setDifficultyData] = useState({
@@ -11,7 +12,7 @@ const DifficultyStat = () => {
   useEffect(() => {
     const fetchDifficultyData = async () => {
       try {
-        const response = await axios.get('https://dsa-tracker-nh8t.onrender.com/api/stats/getstatsbydiff');
+        const response = await api.get('/api/stats/getstatsbydiff');
         // Merge with default values to ensure all levels exist
         setDifficultyData(prev => ({
           Easy: response.data.data?.Easy || 0,

@@ -1,5 +1,6 @@
-import axios from "axios";
+
 import React, { useState } from "react";
+import api from "./api/axios";
 
 const AiCard = () => {
   const [prompt, setPrompt] = useState("");
@@ -11,7 +12,7 @@ const AiCard = () => {
     setLoading(true);
     setAiReply(""); 
     try {
-      const response = await axios.post("https://dsa-tracker-nh8t.onrender.com/api/problem/hint", { prompt });
+      const response = await api.post("/api/problem/hint", { prompt });
 
       let text = response.data.aiReply || "No reply from AI.";
      let i = 0;

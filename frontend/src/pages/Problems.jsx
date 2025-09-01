@@ -3,6 +3,8 @@ import SearchBar from '../components/Searchbar';
 import Problemtable from "../components/Problemtable.jsx";
 import FilterComponent from "../components/Filter.jsx";
 import axios from 'axios';
+import api from "./api/axios";  // use this instead of raw axios
+
 
 const Problems = () => {
   const [problems, setProblems] = useState([]);
@@ -13,7 +15,7 @@ const Problems = () => {
     const fetchProblems = async () => {
       try {
         setLoading(true); 
-        const response = await axios.get('https://dsa-tracker-nh8t.onrender.com/api/problem/all-problems', {
+        const response = await api.get('/api/problem/all-problems', {
           params: filters,
         });
         setProblems(response.data.data || []);

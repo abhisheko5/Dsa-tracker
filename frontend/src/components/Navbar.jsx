@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import axios from 'axios';
+import api from "./api/axios";  // use this instead of raw axios
+
 
 const Navbar = () => {
   const [problems, setProblems] = useState([]);
@@ -9,7 +10,7 @@ const Navbar = () => {
   const handleClick = async () => {
     setLoading(true);
     try {
-      const response = await axios.post("https://dsa-tracker-nh8t.onrender.com/api/ai/random");
+      const response = await api.post("/api/ai/random");
       console.log("API Response:", response.data);
       // Set problems array from numberedItems
       setProblems(response.data.numberedItems || []);

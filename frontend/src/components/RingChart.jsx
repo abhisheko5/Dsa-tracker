@@ -1,5 +1,6 @@
 import { PieChart, Pie, Cell, Label } from "recharts";
-import axios from "axios";
+import api from "./api/axios";  // use this instead of raw axios
+
 import { useEffect, useState } from "react";
 
 const COLORS = ["#16a34a", "#e5e7eb"]; // green = solved, gray = unsolved
@@ -11,7 +12,7 @@ export default function RingChart() {
   useEffect(() => {
     const getstats = async () => {
       try {
-        const response = await axios.get("https://dsa-tracker-nh8t.onrender.com/api/stats/getstats");
+        const response = await api.get("/api/stats/getstats");
         console.log("API Response:", response.data);
 
         const solved = response.data.data.solved ?? 0;

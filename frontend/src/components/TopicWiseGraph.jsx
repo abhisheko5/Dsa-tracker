@@ -2,7 +2,8 @@ import {
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, LabelList,Cell
 } from "recharts";
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import api from "./api/axios";  // use this instead of raw axios
+
 
 export default function WeakTopicsChart() {
   const [topics, setTopics] = useState([]);
@@ -10,7 +11,7 @@ export default function WeakTopicsChart() {
   useEffect(() => {
     const getProblems = async () => {
       try {
-        const response = await axios.get("https://dsa-tracker-nh8t.onrender.com/api/stats/getstatsbytopic");
+        const response = await api.get("/api/stats/getstatsbytopic");
         let sortedData = response.data.data.sort((a, b) => a.solved - b.solved); // weakest first
         setTopics(sortedData);
       } catch (error) {
