@@ -48,7 +48,6 @@ const Home=()=>{
             <Progressbar />
           </Card>
           <Card className="flex-1 flex items-center justify-center">
-            <TotalChart />
             </Card>
 
           {/* Progress Bar Card - spans 2 columns */}
