@@ -46,7 +46,7 @@ function Problemtable({ problems: initialProblems }) {
           </tr>
         </thead>
         <tbody>
-          {problems.map((problem, index) => (
+          {(problems || []).map((problem, index) => (
             <tr key={problem._id} className="border border-gray-200">
               <td className="px-4 py-2">{index + 1}</td>
               <td className="px-4 py-2">
