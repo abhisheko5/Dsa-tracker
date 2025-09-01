@@ -5,7 +5,7 @@ import cors from 'cors'
 const app=express();
 
 app.use(cors({
-  origin:["https://melodic-elf-1b8ac7.netlify.app"],
+  origin:["https://dsatrackerwithai.netlify.app"],
   credentials:true,
 }));
 
