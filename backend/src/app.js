@@ -5,8 +5,7 @@ import cors from 'cors'
 const app=express();
 
 app.use(cors({
-  origin:["http://localhost:5173","https://dsatrackerwithai.netlify.app/"],
-
+  origin:["http://localhost:5173","https://dsatrackerwithai.netlify.app"],
   credentials:true,
 }));
 app.use(cookieParser());
