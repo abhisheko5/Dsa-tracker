@@ -28,6 +28,9 @@ app.use('/api/revision',revisionRoutes);
 app.use('/api/status',problemStatusRoutes);
 app.use('/api/stats',analyticsRoutes);
 app.use('/api/ai',aiRoutes);
+app.get("/", (req, res) => {
+  res.send("✅ DSA Tracker backend is running!");
+});
 
 
 
