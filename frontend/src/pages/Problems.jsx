@@ -13,7 +13,7 @@ const Problems = () => {
     const fetchProblems = async () => {
       try {
         setLoading(true); 
-        const response = await axios.get('http://localhost:3000/api/problem/all-problems', {
+        const response = await axios.get('https://dsa-tracker-nh8t.onrender.com/api/problem/all-problems', {
           params: filters,
         });
         setProblems(response.data.data || []);
