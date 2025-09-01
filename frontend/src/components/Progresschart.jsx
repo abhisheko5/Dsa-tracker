@@ -18,7 +18,7 @@ const MyChart = () => {
     const getProgressData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/api/stats/getstatsbytopic`
+          `https://dsa-tracker-nh8t.onrender.com/api/stats/getstatsbytopic`
         );
 
         // ✅ Map backend data (topic → X-axis, solved → Y-axis)

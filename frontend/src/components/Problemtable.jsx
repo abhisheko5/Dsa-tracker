@@ -13,7 +13,7 @@ function Problemtable({ problems: initialProblems }) {
   const handleClick = async (problemNo) => {
     try {
       const deletedProblem = await axios.delete(
-        `http://localhost:3000/api/problem/delete/${problemNo}`
+        `https://dsa-tracker-nh8t.onrender.com/api/problem/delete/${problemNo}`
       );
 
     

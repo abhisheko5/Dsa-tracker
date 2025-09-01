@@ -26,7 +26,7 @@ const ProblemForm = () => {
     }
 
     try{
-      const response= await axios.post('http://localhost:3000/api/problem/add',problemData);
+      const response= await axios.post('https://dsa-tracker-nh8t.onrender.com/api/problem/add',problemData);
     console.log("response",response.data);
     setproblems(prevProblems => [...prevProblems, response.data.data]);
   }
