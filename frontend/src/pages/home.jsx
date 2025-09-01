@@ -2,7 +2,7 @@ import React from "react";
 import Sidebar from "../components/SidePanel.jsx";
 import Navbar from "../components/Navbar.jsx";
 import Card from "../components/Card.jsx";
-import Progressbar from "../components/progresschart.jsx";
+import Progressbar from "../components/Progresschart.jsx";
 import DifficultyStat from '../components/DifficultyStat.jsx';
 import CalendarCard from '../components/Calendar.jsx';
 import RecentProblems from '../components/Recentproblems.jsx';
