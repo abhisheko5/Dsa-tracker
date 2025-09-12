@@ -2,11 +2,13 @@ import React,{useState} from 'react';
 import axios from 'axios';
 import { toast } from "react-hot-toast";
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from "../context/AuthContext";
+
 
 
 
  const Login=()=>{
-  const[isLoggedIn,setIsLoggedIn]=useState(false);
+  const { setIsLoggedIn } = useAuth();
   const[isEmail,setIsEmail]=useState('');
   const[isPassword,setIsPassword]=useState('');
   const[isName,setIsName]=useState('');

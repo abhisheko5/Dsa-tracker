@@ -1,47 +1,48 @@
-import { useState } from 'react'
-import Layout from './components/Layout.jsx'
-import Login from './pages/Login.jsx'
-import NotesPage from './pages/NotesPage.jsx';
-import { Toaster } from 'react-hot-toast';
-import Home from './pages/home.jsx'
-import ChatwithAi from './pages/Ai.jsx'
-import Problems from './pages/Problems.jsx'
-import AddProblem from './pages/AddProblem.jsx'
-import Revision from './pages/Revision.jsx'
-import Recentsolved from './pages/RecentProblems.jsx'
-import RoadmapPage from './pages/roadmap.jsx'
+import { useState } from "react";
+import Layout from "./components/Layout.jsx";
+import Login from "./pages/Login.jsx";
+import NotesPage from "./pages/NotesPage.jsx";
+import { Toaster } from "react-hot-toast";
+import Home from "./pages/home.jsx";
+import ChatwithAi from "./pages/Ai.jsx";
+import Problems from "./pages/Problems.jsx";
+import AddProblem from "./pages/AddProblem.jsx";
+import Revision from "./pages/Revision.jsx";
+import Recentsolved from "./pages/RecentProblems.jsx";
+import RoadmapPage from "./pages/roadmap.jsx";
+import ProtectedRoute from "./components/ProtectedRoute";
+import { AuthProvider } from "./context/AuthContext";
 
+import Settings from "./pages/Settings.jsx";
+import { Routes, Route } from "react-router-dom";
 
-import Settings from './pages/Settings.jsx'
-import {Routes, Route} from 'react-router-dom'
-
-import './App.css'
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
 
   return (
-   <div>
-            <Toaster position="top-right" />
+        <AuthProvider>
 
-    <Routes>
-         <Route path="/" element={ <Login/>} ></Route>
+      <Toaster position="top-right" />
 
-      <Route path="/" element={<Layout/>}>
-   <Route path="/home" element={ <Home/>} ></Route>
-   <Route path="/Problem" element={ <Problems/>} ></Route>
-   <Route path="/add-problem" element={ <AddProblem/>} ></Route>
-   <Route path="/notes" element={<NotesPage />} />
-   <Route path="/revision" element={ <Revision/>} ></Route>
-   <Route path="/settings" element={ <Settings/>} ></Route>
-   <Route path="/chat-with-ai" element={ <ChatwithAi/>} ></Route>
-   <Route path="/recent" element={ <Recentsolved/>} ></Route>
-             <Route path="/roadmap" element={<RoadmapPage />} />
+      <Routes>
+        <Route path="/" element={<Login />}></Route>
+        <Route path="/" element={<ProtectedRoute><Layout /></ProtectedRoute>}>
+          <Route path="/home" element={<ProtectedRoute><Home /></ProtectedRoute>}></Route>
+          <Route path="/Problem" element={<ProtectedRoute><Problems/></ProtectedRoute>}></Route>
+          <Route path="/add-problem" element={<ProtectedRoute><AddProblem /></ProtectedRoute>}></Route>
+          <Route path="/notes" element={<ProtectedRoute><NotesPage/></ProtectedRoute>} />
+          <Route path="/revision" element={<ProtectedRoute><Revision/></ProtectedRoute>}></Route>
+          <Route path="/settings" element={<ProtectedRoute><Settings/></ProtectedRoute>}></Route>
+          <Route path="/chat-with-ai" element={<ProtectedRoute><ChatwithAi/></ProtectedRoute>}></Route>
+          <Route path="/recent" element={<ProtectedRoute><Recentsolved/></ProtectedRoute>}></Route>
+          <Route path="/roadmap" element={<ProtectedRoute><RoadmapPage/></ProtectedRoute>} />
+        </Route>
+      </Routes>
+        </AuthProvider>
 
-</Route>
-</Routes>
-   </div>
-  )
+  );
 }
 
 export default App;

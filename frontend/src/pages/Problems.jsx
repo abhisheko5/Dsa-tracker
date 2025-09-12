@@ -16,8 +16,9 @@ const Problems = () => {
     const fetchProblems = async () => {
       try {
         setLoading(true); 
-        const response = await axios.get('http://localhost:3000/api/problem/all-problems',{ withCredentials: true}, {
+        const response = await axios.get('http://localhost:3000/api/problem/all-problems', {
           params: filters,
+          withCredentials: true
         });
         const problems = response.data?.data || [];
         setAllProblems(problems);
