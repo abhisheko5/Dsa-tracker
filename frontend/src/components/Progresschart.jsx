@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import api from "../api/axios";
-
 import {
   LineChart,
   Line,
@@ -11,6 +9,7 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
+import axios from "axios";
 
 const MyChart = () => {
   const [data, setData] = useState([]);
@@ -18,8 +17,8 @@ const MyChart = () => {
   useEffect(() => {
     const getProgressData = async () => {
       try {
-        const response = await api.get(
-          `/api/stats/getstatsbytopic`
+        const response = await axios.get(
+          `http://localhost:3000/api/stats/getstatsbytopic`,{ withCredentials: true }
         );
 
         // ✅ Map backend data (topic → X-axis, solved → Y-axis)
@@ -40,7 +39,7 @@ const MyChart = () => {
   return (
     <div className="relative w-full h-96 bg-white p-4 rounded-xl shadow-lg flex flex-col">
       <div className="flex justify-between items-center mb-2">
-        <h2 className="text-xl font-bold text-indigo-700">Progress Chart</h2>
+        <h2 className="text-xl font-bold text-[#03045e]">Progress Chart</h2>
       </div>
 
       <ResponsiveContainer width="100%" height="100%">
@@ -60,7 +59,7 @@ const MyChart = () => {
           <Line
             type="monotone"
             dataKey="amt"
-            stroke="#6366f1"
+            stroke="#03045e"
             strokeWidth={3}
             dot={{ r: 5, fill: "#6366f1", stroke: "#fff", strokeWidth: 2 }}
             activeDot={{ r: 8 }}
@@ -76,7 +75,7 @@ const MyChart = () => {
 
 function Progressbar() {
   return (
-    <div className="w-full">
+    <div className="w-full h-full">
       <MyChart />
     </div>
   );

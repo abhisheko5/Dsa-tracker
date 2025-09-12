@@ -5,7 +5,7 @@ const RecentProblems = ({recentProblems}) => {
 
   return (
     <div className="w-full h-full flex flex-col p-6 bg-white rounded-xl shadow-lg">
-      <h2 className="text-2xl font-bold text-indigo-700 mb-4 text-center">
+      <h2 className="text-2xl font-bold text-[#03045e]   mb-4 text-center">
         Recent Problems
       </h2>
 

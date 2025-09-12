@@ -1,6 +1,5 @@
 import React from "react";
-import api from "../api/axios";
-
+import axios from 'axios';
 import { useProblemContext } from "../context/ProblemContext";
 
 
@@ -27,7 +26,7 @@ const ProblemForm = () => {
     }
 
     try{
-      const response= await api.post('/api/problem/add',problemData);
+      const response= await axios.post('http://localhost:3000/api/problem/add',problemData,{withCredentials:true});
     console.log("response",response.data);
     setproblems(prevProblems => [...prevProblems, response.data.data]);
   }
@@ -154,7 +153,7 @@ const ProblemForm = () => {
       </div>
 
       {/* Submit Button */}
-      <button  className="w-full bg-blue-600 text-white font-semibold py-2 rounded-md hover:bg-blue-700 transition">
+      <button  className="w-full bg-[#03045e] text-white font-semibold py-2 rounded-md hover:bg-blue-700 transition">
         Add
       </button>
     </div>

@@ -18,14 +18,11 @@ const userSchema= new mongoose.Schema({
   password:{
     type:String,
     required:true,
-    length:{min:8},
+    minlength:8,
   },
   refreshToken:{
     type:String,
     default:""
-  },
-  dailyTask:{
-    type:Number
   },
 
 },{
@@ -56,7 +53,7 @@ userSchema.methods.getAccessToken = function (){
         },
         process.env.ACCESS_TOKEN_SECRET,
         {
-            expiresIn: process.env.ACCESS_TOKEN_EXPIRY || "30mins"
+            expiresIn: process.env.ACCESS_TOKEN_EXPIRY || "30m"
         }
     );
 }

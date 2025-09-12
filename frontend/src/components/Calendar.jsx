@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import Calendar from 'react-calendar';
-import api from "../api/axios";
-
+import axios from 'axios';
 import 'react-calendar/dist/Calendar.css';
 
 function CalendarCard() {
@@ -15,8 +14,8 @@ function CalendarCard() {
     if (hoverData[dateStr]) return;
 
     try {
-      const res = await api.get(
-        `https://dsa-tracker-nh8t.onrender.com/api/status/solvedproblems?date=${dateStr}`
+      const res = await axios.get(
+        `http://localhost:3000/api/status/solvedproblems?date=${dateStr}`,{ withCredentials: true}
       );
       setHoverData((prev) => ({
         ...prev,

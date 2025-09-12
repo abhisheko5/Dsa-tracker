@@ -12,7 +12,7 @@ export const ProblemProvider = ({children})=>{
   useEffect(()=>{
     const fetchProblems = async () => {
       try{
-        const response = await axios.get('http://localhost:3000/api/problem/all-problems');
+        const response = await axios.get('http://localhost:3000/api/problem/all-problems',{ withCredentials: true });
         console.log("response", response.data);
         setproblems(response.data.data);
       } catch (error) {

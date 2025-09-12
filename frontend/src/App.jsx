@@ -9,6 +9,7 @@ import Problems from './pages/Problems.jsx'
 import AddProblem from './pages/AddProblem.jsx'
 import Revision from './pages/Revision.jsx'
 import Recentsolved from './pages/RecentProblems.jsx'
+import RoadmapPage from './pages/roadmap.jsx'
 
 
 import Settings from './pages/Settings.jsx'
@@ -35,6 +36,8 @@ function App() {
    <Route path="/settings" element={ <Settings/>} ></Route>
    <Route path="/chat-with-ai" element={ <ChatwithAi/>} ></Route>
    <Route path="/recent" element={ <Recentsolved/>} ></Route>
+             <Route path="/roadmap" element={<RoadmapPage />} />
+
 </Route>
 </Routes>
    </div>

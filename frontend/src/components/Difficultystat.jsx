@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import api from "../api/axios";
-
+import axios from 'axios';
 
 const DifficultyStat = () => {
   const [difficultyData, setDifficultyData] = useState({
@@ -12,7 +11,7 @@ const DifficultyStat = () => {
   useEffect(() => {
     const fetchDifficultyData = async () => {
       try {
-        const response = await api.get('/api/stats/getstatsbydiff');
+        const response = await axios.get('http://localhost:3000/api/stats/getstatsbydiff',{ withCredentials: true });
         // Merge with default values to ensure all levels exist
         setDifficultyData(prev => ({
           Easy: response.data.data?.Easy || 0,

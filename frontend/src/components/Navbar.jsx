@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import api from "../api/axios";
-
+import axios from 'axios';
 
 const Navbar = () => {
   const [problems, setProblems] = useState([]);
@@ -10,7 +9,7 @@ const Navbar = () => {
   const handleClick = async () => {
     setLoading(true);
     try {
-      const response = await api.post("/api/ai/random");
+      const response = await axios.post("http://localhost:3000/api/ai/random");
       console.log("API Response:", response.data);
       // Set problems array from numberedItems
       setProblems(response.data.numberedItems || []);
@@ -36,7 +35,7 @@ const Navbar = () => {
           <button 
             onClick={handleClick} 
             disabled={loading}
-            className="bg-indigo-500 text-white px-4 py-2 rounded-full hover:bg-indigo-600 transition disabled:bg-gray-400"
+            className="bg-[#03045e] text-white px-4 py-2 rounded-full hover:bg-gray-400  transition disabled:bg-gray-400"
           >
             {loading ? 'Loading...' : 'Random 5'}
           </button>
@@ -96,7 +95,7 @@ const Navbar = () => {
             <button
               onClick={handleClick}
               disabled={loading}
-              className="bg-indigo-500 text-white px-4 py-2 rounded hover:bg-indigo-600 transition disabled:bg-gray-400"
+              className="bg-gray-500 text-white px-4 py-2 rounded hover:   transition disabled:bg-gray-400"
             >
               {loading ? 'Loading...' : 'Get New Problems'}
             </button>

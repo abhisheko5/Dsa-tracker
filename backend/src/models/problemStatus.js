@@ -6,8 +6,9 @@ const ProblemstatusSchema= new mongoose.Schema({
   user:{
   type:mongoose.Schema.Types.ObjectId,
     ref:'User'    
+  ,
+  require:true,
   },
-
   problem:{
     type:mongoose.Schema.Types.ObjectId,
     ref:'Problem',

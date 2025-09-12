@@ -2,8 +2,7 @@ import {
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, LabelList,Cell
 } from "recharts";
 import React, { useState, useEffect } from "react";
-import api from "../api/axios";
-
+import axios from "axios";
 
 export default function WeakTopicsChart() {
   const [topics, setTopics] = useState([]);
@@ -11,7 +10,7 @@ export default function WeakTopicsChart() {
   useEffect(() => {
     const getProblems = async () => {
       try {
-        const response = await api.get("/api/stats/getstatsbytopic");
+        const response = await axios.get("http://localhost:3000/api/stats/getstatsbytopic",{ withCredentials: true });
         let sortedData = response.data.data.sort((a, b) => a.solved - b.solved); // weakest first
         setTopics(sortedData);
       } catch (error) {

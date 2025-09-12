@@ -4,7 +4,8 @@ import User from "../models/user.model.js";
 
 export const authMiddleware = async (req, res, next) => {
     try{
-        const token = req.cookies?.accessToken || req.headers.authorization?.replace('Bearer ', '');
+        console.log(req.cookies?.accessToken);
+        const token = req.cookies?.accessToken || req.headers.authorization?.replace('Bearer ','');
 
     if(!token){
         throw new ApiError(401, "unauthorized request, please login");
@@ -20,6 +21,10 @@ export const authMiddleware = async (req, res, next) => {
         throw new ApiError(401,"invalid token");
     }
     req.user= user;
+    console.log("TOKEN:", token);
+console.log("DECODED:", decoded);
+console.log("USER:", user);
+
     next();
 }
 catch(err){

@@ -1,8 +1,6 @@
 import {useState, useEffect} from "react";
 import React from "react";
 import axios from "axios";
-import api from "../api/axios";
-
 import Card from "../components/Card.jsx";
 import RevisionTable from '../components/RevisionTable.jsx';
 import toast from 'react-hot-toast';
@@ -20,7 +18,7 @@ const Revision = () => {
     const fetchRevisionDue = async () => {
     try{
     
-      const Revisiondue= await api.get('/api/revision/revision-schedule');
+      const Revisiondue= await axios.get('http://localhost:3000/api/revision/revision-schedule',{ withCredentials: true});
       const dueProblems=Revisiondue.data.data || []
       setRevisionDue(dueProblems);
       console.log("Revision Due Problems:", dueProblems);
@@ -53,7 +51,7 @@ fetchRevisionDue();
     
     
       <div className="flex flex-col items-center justify-center py-10 px-4">
-     <h1 className="text-3xl font-bold text-gray-700 mb-2 text-center">Revision Dashboard</h1>
+     <h1 className="text-3xl font-bold text-[#03045e] mb-2 text-center">Revision Dashboard</h1>
           <p className="text-gray-600 text-center ">Review and practice problems you've marked for revision. Stay consistent and track your progress!</p>
         <RevisionTable problems={revisionDue}/>
       

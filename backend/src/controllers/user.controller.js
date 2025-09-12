@@ -25,11 +25,13 @@ const registerUser = async(req,res)=>{
     password,
 
   })
-  
+
   await user.save();
+  
 
   const { accessToken, refreshToken } = await generateAccessandRefreshToken(user._id);
-
+ user.refreshToken = refreshToken;
+  await user.save();
 const option={
     httpOnly: true,
     secure: true, 
@@ -68,6 +70,10 @@ const loginUser = async(req,res)=>{
     sameSite:"lax",
   }
 
+   user.refreshToken = refreshToken;
+  await user.save();
+
+
   res
   .status(200)
   .cookie("accessToken", accessToken,option)
@@ -75,34 +81,36 @@ const loginUser = async(req,res)=>{
   .json(
           new ApiResponse(200,user,"user loggedin successfully")
   )
+
+  console.log(user);
 }
 
-const logoutUser=async(req,res)=>{
-   await User.findByIdAndUpdate(
-        req.user._id,
-        {
-            $unset:{refreshToken:1}
-        },
-        {
-            new:true,
-        }
-    )
+const logoutUser = async (req, res) => {
+  try {
+    // If user is logged in, clear refreshToken from DB
+    if (req.user?._id) {
+      await User.findByIdAndUpdate(req.user._id, { $unset: { refreshToken: 1 } });
+    }
 
     const options = {
-        httpOnly:true,
-    secure: process.env.NODE_ENV === "production",
+      httpOnly: true,
       sameSite: "none",
+      secure: true // needed for cross-origin cookies
+    };
 
-}
+    // Always clear cookies (even if user wasn’t logged in)
+    return res
+      .status(200)
+      .clearCookie("accessToken", options)
+      .clearCookie("refreshToken", options)
+      .json({ success: true, message: "User logged out successfully" });
 
-return res
-.status(200)
-.clearCookie("accessToken", options)
-.clearCookie("refreshToken", options)
-.json(
-    new ApiResponse(200,null,"User logged out successfully")
-)
+  } catch (error) {
+    console.error("Logout error:", error);
+    return res.status(500).json({ success: false, message: "Server error during logout" });
+  }
 };
+
 
 
 export {registerUser,loginUser,logoutUser};

@@ -1,6 +1,5 @@
-
+import axios from "axios";
 import React, { useState } from "react";
-import api from "../api/axios";
 
 const AiCard = () => {
   const [prompt, setPrompt] = useState("");
@@ -8,18 +7,18 @@ const AiCard = () => {
   const [loading, setLoading] = useState(false);
 
   const handleInput = async () => {
-    if (!prompt.trim()) return; 
+    if (!prompt.trim()) return; // prevent empty requests
     setLoading(true);
-    setAiReply(""); 
+    setAiReply(""); // clear previous reply
     try {
-      const response = await api.post("/api/problem/hint", { prompt });
-
+      const response = await axios.post("http://localhost:3000/api/problem/hint", { prompt });
+      // simulate typing effect
       let text = response.data.aiReply || "No reply from AI.";
      let i = 0;
-let currentText = ""; 
+let currentText = ""; // local variable to build reply
 const interval = setInterval(() => {
-  currentText += text.charAt(i);  
-  setAiReply(currentText);         
+  currentText += text.charAt(i);   // append char to local variable
+  setAiReply(currentText);         // update state with full text so far
   i++;
   if (i >= text.length) clearInterval(interval);
 }, 25);
@@ -33,9 +32,9 @@ const interval = setInterval(() => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-indigo-50 to-indigo-200 p-4">
+    <div className="flex flex-col items-center justify-center min-h-screen p-4">
       <div className="w-full max-w-2xl bg-white rounded-3xl shadow-2xl p-8 flex flex-col gap-6 transform hover:scale-105 transition-transform duration-300">
-        <h2 className="text-3xl font-extrabold text-indigo-700 text-center">
+        <h2 className="text-3xl font-extrabold text-[#03045e] text-center">
           AI DSA Assistant
         </h2>
 
@@ -60,7 +59,7 @@ const interval = setInterval(() => {
         <button
           onClick={handleInput}
           disabled={loading}
-          className="w-full py-3 bg-indigo-600 text-white font-semibold rounded-xl shadow-lg hover:bg-indigo-700 active:scale-95 transition transform disabled:opacity-50"
+          className="w-full py-3 bg-[#03045e] text-white font-semibold rounded-xl shadow-lg hover:bg-indigo-700 active:scale-95 transition transform disabled:opacity-50"
         >
           {loading ? "Thinking..." : "Ask AI"}
         </button>

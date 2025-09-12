@@ -1,6 +1,5 @@
 import React from "react";
-import api from "../api/axios";
-
+import axios from 'axios';
 import { useProblemContext } from "../context/ProblemContext";
 
 
@@ -25,7 +24,7 @@ const ProblemUpdateForm = () => {
     }
 
     try{
-      const response= await api.post('/api/problem/update',problemData);
+      const response= await axios.post('http://localhost:3000/api/problem/update',problemData,{ withCredentials: true});
     console.log("response",response.data);
     setproblems(prevProblems => [...prevProblems, response.data.data]);
   }

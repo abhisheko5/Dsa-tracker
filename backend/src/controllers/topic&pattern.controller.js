@@ -1,36 +1,32 @@
-import Topic from "../models/topic.model.js"
-import Pattern from '../models/pattern.model.js';
+import { ApiResponse } from "../utils/apiResponse.js";
+import Problem from "../models/problem.model.js";
+import Topic from "../models/topic.model.js";
 
+const getTopicwiseproblemcount = async (req, res) => {
+  const userId = req.user._id; // for user-specific counts
 
-const getTopicwiseproblemcount=async(req,res)=>{
-  const count=problems.aggregate([
+  const count = await Problem.aggregate([
+    { $match: { user: userId } }, // filter by logged-in user
     {
-      $lookup:{//to see in diff schemas
-        from:"topics",
-        localField:"topic",//field in current schema
-        foreignField:"_id",//field in lookup schewa
-        as:"topicinfo"
+      $lookup: {
+        from: "topics",
+        localField: "topic",
+        foreignField: "_id",
+        as: "topicinfo"
       }
     },
+    { $unwind: "$topicinfo" },
     {
-      $unwind:"$topicinfo"//array ko into object
-    },
-
-    {
-      $group:{//joining together
-        _id:"$topicinfo.name",
-        count:{$sum:1}//counting all
+      $group: {
+        _id: "$topicinfo.name",
+        count: { $sum: 1 }
       }
     }
-  ])
+  ]);
 
-  return res
-  .status(200)
-  .json(
-    new ApiResponse(200,count,"overall topics count")
-  )
+  return res.status(200).json(
+    new ApiResponse(200, count, "Overall topic-wise problem count")
+  );
+};
 
-}
-
-const getPatternwiseproblemcount
-export  {getTopicwiseproblemcount};
+export { getTopicwiseproblemcount };

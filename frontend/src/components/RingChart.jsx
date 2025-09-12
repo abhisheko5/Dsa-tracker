@@ -1,9 +1,8 @@
 import { PieChart, Pie, Cell, Label } from "recharts";
-import api from "../api/axios";
-
+import axios from "axios";
 import { useEffect, useState } from "react";
 
-const COLORS = ["#16a34a", "#e5e7eb"]; // green = solved, gray = unsolved
+const COLORS = ["#03045e", "#e5e7eb"]; // green = solved, gray = unsolved
 
 export default function RingChart() {
   const [stats, setStats] = useState([]);
@@ -12,7 +11,7 @@ export default function RingChart() {
   useEffect(() => {
     const getstats = async () => {
       try {
-        const response = await api.get("/api/stats/getstats");
+        const response = await axios.get("http://localhost:3000/api/stats/getstats",{ withCredentials: true });
         console.log("API Response:", response.data);
 
         const solved = response.data.data.solved ?? 0;
@@ -66,7 +65,7 @@ export default function RingChart() {
 
     <div className="flex gap-4 justify-end   ">
         <div className="flex items-center gap-2">
-          <span className="w-3 h-3 rounded-full bg-green-600"></span>
+          <span className="w-3 h-3 rounded-full bg-[#03045e]"></span>
           <span className="text-sm text-gray-700">Solved</span>
         </div>
         <div className="flex items-center gap-2">
