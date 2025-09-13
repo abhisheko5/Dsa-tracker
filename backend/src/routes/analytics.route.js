@@ -5,7 +5,7 @@ import {authMiddleware} from "../middlewares/authMiddleware.js"
 
 import {getoverallStats,getstatsbydifficulty,getstatsbyTopic} from '../controllers/analytics.controller.js'
 
-router.route('/getstats').get(authMiddleware,getoverallStats);
+router.route('/getstats').get(getoverallStats);
 router.route('/getstatsbydiff').get(authMiddleware,getstatsbydifficulty);
 router.route('/getstatsbytopic').get(authMiddleware,getstatsbyTopic);
 
