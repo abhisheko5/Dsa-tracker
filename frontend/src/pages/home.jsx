@@ -19,7 +19,7 @@ const Home = () => {
   useEffect(() => {
     const fetchRecentProblems = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/status/recentproblems",{ withCredentials: true });
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/status/recentproblems`,{ withCredentials: true });
         setRecentProblems(response.data?.data || []);
       } catch (error) {
         console.error("Error fetching recent problems:", error);
@@ -28,7 +28,7 @@ const Home = () => {
 
     const generateQuote= async()=>{
       try{
-        const response= await axios.post('http://localhost:3000/api/ai/Quote')
+        const response= await axios.post(`${import.meta.env.VITE_API_URL}/api/ai/Quote`)
         const cleanedQuote=JSON.parse(response.data)
         setQuote(cleanedQuote)
       }

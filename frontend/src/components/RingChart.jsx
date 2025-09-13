@@ -11,7 +11,7 @@ export default function RingChart() {
   useEffect(() => {
     const getstats = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/stats/getstats",{ withCredentials: true });
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/stats/getstats`,{ withCredentials: true });
         console.log("API Response:", response.data);
 
         const solved = response.data.data.solved ?? 0;

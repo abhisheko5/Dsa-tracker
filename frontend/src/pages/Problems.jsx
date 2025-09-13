@@ -16,7 +16,7 @@ const Problems = () => {
     const fetchProblems = async () => {
       try {
         setLoading(true); 
-        const response = await axios.get('http://localhost:3000/api/problem/all-problems', {
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/problem/all-problems`, {
           params: filters,
           withCredentials: true
         });

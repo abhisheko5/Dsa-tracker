@@ -24,7 +24,7 @@ const ProblemUpdateForm = () => {
     }
 
     try{
-      const response= await axios.post('http://localhost:3000/api/problem/update',problemData,{ withCredentials: true});
+      const response= await axios.post(`${import.meta.env.VITE_API_URL}/api/problem/update`,problemData,{ withCredentials: true});
     console.log("response",response.data);
     setproblems(prevProblems => [...prevProblems, response.data.data]);
   }

@@ -13,7 +13,7 @@ function Problemtable({ problems: initialProblems }) {
   const handleClick = async (problemNo) => {
     try {
       const deletedProblem = await axios.delete(
-        `http://localhost:3000/api/problem/delete/${problemNo}`,{ withCredentials: true }
+        `${import.meta.env.VITE_API_URL}/api/problem/delete/${problemNo}`,{ withCredentials: true }
       );
 
       setProblems((prev) => prev.filter((p) => p.problemNo !== problemNo));

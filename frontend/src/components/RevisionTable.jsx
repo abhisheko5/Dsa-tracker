@@ -13,7 +13,7 @@ const RevisionTable=({problems})=>{
 
     const handleChange=async(id)=>{
     try{
-    await axios.post(`http://localhost:3000/api/revision/${id}/revisiondone`,{ withCredentials: true})
+    await axios.post(`${import.meta.env.VITE_API_URL}/api/revision/${id}/revisiondone`,{ withCredentials: true})
         toast.success('Revision marked done!');
     }
     catch(error){

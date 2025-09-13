@@ -9,7 +9,7 @@ const Navbar = () => {
   const handleClick = async () => {
     setLoading(true);
     try {
-      const response = await axios.post("http://localhost:3000/api/ai/random");
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/ai/random`);
       console.log("API Response:", response.data);
       // Set problems array from numberedItems
       setProblems(response.data.numberedItems || []);

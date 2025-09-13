@@ -10,7 +10,7 @@ export default function WeakTopicsChart() {
   useEffect(() => {
     const getProblems = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/stats/getstatsbytopic",{ withCredentials: true });
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/stats/getstatsbytopic`,{ withCredentials: true });
         let sortedData = response.data.data.sort((a, b) => a.solved - b.solved); // weakest first
         setTopics(sortedData);
       } catch (error) {

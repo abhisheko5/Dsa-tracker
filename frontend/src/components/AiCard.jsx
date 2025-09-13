@@ -1,5 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
+import VITE_API_URL from "../config";
+
 
 const AiCard = () => {
   const [prompt, setPrompt] = useState("");
@@ -11,7 +13,7 @@ const AiCard = () => {
     setLoading(true);
     setAiReply(""); // clear previous reply
     try {
-      const response = await axios.post("http://localhost:3000/api/problem/hint", { prompt });
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/ai/Response`, { prompt },{withCredentials:true});
       // simulate typing effect
       let text = response.data.aiReply || "No reply from AI.";
      let i = 0;

@@ -20,7 +20,7 @@ import { useAuth } from "../context/AuthContext";
     e.preventDefault();
 
     try{
-      const onSubmit=await axios.post("http://localhost:3000/api/users/login",{
+      const onSubmit=await axios.post(`${import.meta.env.VITE_API_URL}/api/users/login`,{
         email:isEmail,
         password:isPassword
       },{withCredentials:true})
@@ -44,7 +44,7 @@ toast.error(error.response?.data?.message || "Login failed")
     e.preventDefault();
 
     try{
-      const onSubmit=await axios.post("http://localhost:3000/api/users/register",{
+      const onSubmit=await axios.post(`${import.meta.env.VITE_API_URL}/api/users/register`,{
         name:isName,
         email:isEmail,
         password:isPassword

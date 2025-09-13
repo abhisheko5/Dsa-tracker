@@ -18,7 +18,7 @@ const Revision = () => {
     const fetchRevisionDue = async () => {
     try{
     
-      const Revisiondue= await axios.get('http://localhost:3000/api/revision/revision-schedule',{ withCredentials: true});
+      const Revisiondue= await axios.get(`${import.meta.env.VITE_API_URL}/api/revision/revision-schedule`,{ withCredentials: true});
       const dueProblems=Revisiondue.data.data || []
       setRevisionDue(dueProblems);
       console.log("Revision Due Problems:", dueProblems);

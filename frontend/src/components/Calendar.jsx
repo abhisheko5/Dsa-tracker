@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Calendar from 'react-calendar';
 import axios from 'axios';
+import VITE_API_URL from "../config";
 import 'react-calendar/dist/Calendar.css';
 
 function CalendarCard() {
@@ -15,7 +16,8 @@ function CalendarCard() {
 
     try {
       const res = await axios.get(
-        `http://localhost:3000/api/status/solvedproblems?date=${dateStr}`,{ withCredentials: true}
+        `${import.meta.env.VITE_API_URL}
+/api/status/solvedproblems?date=${dateStr}`,{ withCredentials: true}
       );
       setHoverData((prev) => ({
         ...prev,

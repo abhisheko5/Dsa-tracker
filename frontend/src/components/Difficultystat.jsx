@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import VITE_API_URL from "../config";
+
+
 
 const DifficultyStat = () => {
   const [difficultyData, setDifficultyData] = useState({
@@ -11,7 +14,8 @@ const DifficultyStat = () => {
   useEffect(() => {
     const fetchDifficultyData = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/api/stats/getstatsbydiff',{ withCredentials: true });
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}
+/api/stats/getstatsbydiff`,{ withCredentials: true });
         // Merge with default values to ensure all levels exist
         setDifficultyData(prev => ({
           Easy: response.data.data?.Easy || 0,

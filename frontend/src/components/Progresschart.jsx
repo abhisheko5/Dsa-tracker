@@ -18,7 +18,7 @@ const MyChart = () => {
     const getProgressData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/api/stats/getstatsbytopic`,{ withCredentials: true }
+          `${import.meta.env.VITE_API_URL}/api/stats/getstatsbytopic`,{ withCredentials: true }
         );
 
         // ✅ Map backend data (topic → X-axis, solved → Y-axis)
