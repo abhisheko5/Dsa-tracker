@@ -5,7 +5,7 @@ import axios from 'axios';
 import Card from "../components/Card.jsx";
 import Progressbar from "../components/Progresschart.jsx";
 import RingChart from "../components/RingChart.jsx";
-import DifficultyStat from '../components/DifficultyStat';
+import DifficultyStat from '../components/Difficultystat';
 import CalendarCard from '../components/Calendar';
 import RecentProblems from '../components/Recentproblems.jsx';
 import TotalProgress from '../components/TotalProgress.jsx';
