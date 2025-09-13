@@ -66,8 +66,8 @@ const loginUser = async(req,res)=>{
   
   const option={
     httpOnly: true,
-  secure: process.env.NODE_ENV === "production", // true only in prod
-    sameSite:"lax",
+  secure: true, // true only in prod
+    sameSite:"none",
   }
 
    user.refreshToken = refreshToken;
