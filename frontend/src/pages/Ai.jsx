@@ -1,11 +1,6 @@
 import AiCard from '../components/AiCard.jsx'
 
-const ChatwithAi= ()=>{
-  
-  
-
-
-  
+const ChatwithAi= ()=>{  
   return (
     <div className="">
       <AiCard />
