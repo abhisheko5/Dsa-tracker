@@ -74,7 +74,13 @@ toast.error(error.response?.data?.message || "Login failed")
       <p className="text-3xl font-semibold text-gray-800 mt-5">Track, Practice, and Master Data Structures and Algorithms.</p>
       <p className="text-black mt-2">Consistency beats talent when talent doesnt show up."
 — Make your practice count, every day.</p>
+      <div className="text-md bg-blue-500 rounded-full text-white mt-10"> 
+        <h1>Email:demo@gmail.com</h1>
+        <h1>Password:12345678</h1>
+      </div>
+
     </div>
+    
   </div>
 
 
