@@ -13,7 +13,6 @@ import { useAuth } from "../context/AuthContext";
   const[isPassword,setIsPassword]=useState('');
   const[isName,setIsName]=useState('');
   const[currentState,setCurrentState]=useState('Sign-up');
-  const[rememberMe,setRememberMe]=useState (false);
   const navigate=useNavigate();
 
   const LoginhandleSubmit=async(e)=>{

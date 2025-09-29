@@ -21,10 +21,15 @@ export const authMiddleware = async (req, res, next) => {
         throw new ApiError(401,"invalid token");
     }
     req.user= user;
+    console.log("TOKEN:", token);
+console.log("DECODED:", decoded);
+console.log("USER:", user);
 
     next();
 }
 catch(err){
-    throw new ApiError(401,"invalid access token");
+    console.error("Auth middleware error:", err);
+    next(new ApiError(401, err.message || "invalid access token"));
 }
+
 };
