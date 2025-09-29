@@ -11,6 +11,8 @@ app.use(cors({
    credentials: true
 }));
 
+console.log("hi")
+
 import userRoutes from './routes/user.routes.js';
 import problemRoutes from './routes/problem.routes.js';
 import revisionRoutes from './routes/revision.route.js';
