@@ -34,9 +34,7 @@ const registerUser = async(req,res)=>{
   await user.save();
 const option={
     httpOnly: true,
-  secure: process.env.NODE_ENV === "production", // only true in prod (when you use HTTPS)
-      sameSite: "none"
-
+    secure: true, 
 }
 
 res
@@ -68,7 +66,7 @@ const loginUser = async(req,res)=>{
   
   const option={
     httpOnly: true,
-  secure: process.env.NODE_ENV === "production", // only true in prod (when you use HTTPS)
+  secure: true, // true only in prod
     sameSite:"none",
   }
 
@@ -96,7 +94,7 @@ const logoutUser = async (req, res) => {
 
     const options = {
       httpOnly: true,
-  secure: process.env.NODE_ENV === "production", // only true in prod (when you use HTTPS)
+      sameSite: "none",
       secure: true // needed for cross-origin cookies
     };
 
