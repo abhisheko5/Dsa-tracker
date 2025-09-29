@@ -59,7 +59,7 @@ toast.error(error.response?.data?.message || "Login failed")
     }
     catch(error){
       console.log(error);
-      toast.error(error.response?.data?.message || "Sign-up failed")
+      toast.error(error.onSubmit?.data?.message)
 
 
 
