@@ -48,7 +48,8 @@ toast.error(error.response?.data?.message || "Login failed")
         name:isName,
         email:isEmail,
         password:isPassword
-      })
+      },
+    { withCredentials: true })
       console.log(onSubmit.data);
       setIsLoggedIn(true);
       toast.success(onSubmit.data.message)
