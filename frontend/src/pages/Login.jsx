@@ -111,9 +111,6 @@ toast.error(error.response?.data?.message || "Login failed")
   </div>
 
   <div className="flex flex-row items-center justify-between gap-2.5">
-    <div>
-      <label className="text-white text-sm font-normal">Remember me</label>
-    </div>
     <span className="text-[#2d79f3] text-sm font-medium cursor-pointer">Forgot Password?</span>
   </div>
 
@@ -166,10 +163,7 @@ toast.error(error.response?.data?.message || "Login failed")
   </div>
 
   <div className="flex flex-row items-center justify-between gap-2.5">
-    <div>
-      <label className="text-white text-sm font-normal">Remember me</label>
-    </div>
-    
+
   </div>
 
   <button type="submit" className="mt-5 mb-2.5 bg-[#2d79f3] text-white text-[15px] font-medium rounded-[10px] h-[50px] w-full cursor-pointer">

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Calendar from 'react-calendar';
 import axios from 'axios';
-import VITE_API_URL from "../config";
+
 import 'react-calendar/dist/Calendar.css';
 
 function CalendarCard() {
