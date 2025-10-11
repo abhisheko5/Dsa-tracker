@@ -10,7 +10,7 @@ const DifficultyStat = () => {
     Medium: 0,
     Hard: 0,
   });
-
+console.log(difficultyData);
   useEffect(() => {
     const fetchDifficultyData = async () => {
       try {
