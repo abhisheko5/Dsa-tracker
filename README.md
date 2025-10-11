@@ -1,322 +1,963 @@
-# DSA Tracker
+# 🎯 DSA Tracker
 
-DSA Tracker is a full-stack web application to help programmers track, practice, and revise Data Structures & Algorithms (DSA) problems. This repository contains a Node.js + Express backend and a React + Vite frontend. The project includes features such as problem CRUD, revision scheduling, analytics, AI/assistant stubs, and a dashboard UI.
+> A full-stack web application to help programmers track, practice, and revise Data Structures & Algorithms problems with AI-powered assistance.
 
----
-
-## Table of contents
-
-- Project structure
-- Tech stack
-- Getting started (local)
-	- Backend
-	- Frontend
-- Environment variables
-- Available scripts
-- API overview
-- Frontend routes & components
-- Developer notes & suggestions
-- Next steps / roadmap
+[![Node.js](https://img.shields.io/badge/Node.js-18+-green.svg)](https://nodejs.org/)
+[![React](https://img.shields.io/badge/React-19-blue.svg)](https://reactjs.org/)
+[![MongoDB](https://img.shields.io/badge/MongoDB-Latest-green.svg)](https://www.mongodb.com/)
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 ---
 
-## Project structure
+## 📋 Table of Contents
 
-Top-level layout:
+- [✨ Features](#-features)
+- [🏗️ Project Structure](#️-project-structure)
+- [⚡ Tech Stack](#-tech-stack)
+- [🚀 Getting Started](#-getting-started)
+- [⚙️ Environment Variables](#️-environment-variables)
+- [📜 Available Scripts](#-available-scripts)
+- [📡 API Reference](#-api-reference)
+- [🎨 Frontend Routes](#-frontend-routes--components)
+- [💡 Developer Notes](#-developer-notes--suggestions)
+- [📄 License](#-license)
+
+---
+
+## ✨ Features
+
+- ✅ **Problem Management** - Add, update, delete, and search DSA problems
+- 📊 **Analytics Dashboard** - Track progress with beautiful charts and statistics
+- 🔄 **Revision System** - Smart spaced-repetition scheduling (0, 3, 7, 14, 30 days)
+- 🤖 **AI Assistant** - Get hints, solutions, and motivational quotes
+- 📅 **Calendar Integration** - Visual tracking of daily problem-solving
+- 🔐 **Google OAuth** - Secure authentication with Google
+- 📝 **Notes & Intuition** - Save problem-solving insights
+- 🎯 **Filter & Search** - Find problems by difficulty, topic, or pattern
+- 📈 **Progress Tracking** - Real-time statistics and achievements
+
+---
+
+## 🏗️ Project Structure
 
 ```
-README.md
-backend/
-	package.json
-	src/
-		app.js
-		server.js
-		controllers/
-		models/
-		routes/
-		db/
-frontend/
-	package.json
-	src/
-		main.jsx
-		App.jsx
-		pages/
-		components/
-		context/
-		assets/
+DSA-Tracker/
+├── 📄 README.md
+├── 📁 backend/
+│   ├── 📦 package.json
+│   └── 📁 src/
+│       ├── 🚀 app.js
+│       ├── ⚙️ server.js
+│       ├── 🎮 controllers/
+│       ├── 📊 models/
+│       ├── 🛣️ routes/
+│       └── 💾 db/
+└── 📁 frontend/
+    ├── 📦 package.json
+    └── 📁 src/
+        ├── 🎯 main.jsx
+        ├── 📱 App.jsx
+        ├── 📄 pages/
+        ├── 🧩 components/
+        ├── 🔗 context/
+        └── 🎨 assets/
 ```
 
-Notes:
-- Backend code runs from `backend/src` with `server.js` as the entry.
-- Frontend code is a Vite + React app in `frontend/` and uses Tailwind for styling.
+**📝 Notes:**
+- Backend runs from `backend/src` with `server.js` as entry point
+- Frontend is a Vite + React app using Tailwind CSS
 
-## Tech stack
+---
 
-- Backend: Node.js, Express, Mongoose (MongoDB), Passport (Google OAuth), JWT, bcryptjs
-- Frontend: React 19, React Router v7, Vite, TailwindCSS, Recharts
-- Dev tools: Nodemon (backend dev), Vite (frontend dev)
+## ⚡ Tech Stack
 
-## Getting started (local development)
+### Backend 🔧
+- 🟢 **Node.js** - JavaScript runtime
+- 🚂 **Express** - Web framework
+- 🍃 **MongoDB** - NoSQL database
+- 🔌 **Mongoose** - MongoDB ODM
+- 🔐 **Passport** - Google OAuth authentication
+- 🎫 **JWT** - Token-based auth
+- 🔒 **bcryptjs** - Password hashing
 
-Prerequisites:
-- Node.js (v18+ recommended)
-- MongoDB (local or cloud URI)
+### Frontend 🎨
+- ⚛️ **React 19** - UI library
+- 🛣️ **React Router v7** - Navigation
+- ⚡ **Vite** - Build tool
+- 🎨 **TailwindCSS** - Styling
+- 📊 **Recharts** - Data visualization
 
-1. Clone repository
+### Development 🛠️
+- 🔄 **Nodemon** - Auto-reload
+- ✅ **ESLint** - Code linting
+
+---
+
+## 🚀 Getting Started
+
+### 📋 Prerequisites
+
+- 🟢 Node.js v18+
+- 🍃 MongoDB (local or cloud)
+- 📦 npm or yarn
+
+### 📥 Installation
+
+#### 1️⃣ Clone Repository
 
 ```bash
 git clone <repo-url>
 cd DsaTracker
 ```
 
-2. Install backend dependencies
+#### 2️⃣ Backend Setup
 
 ```bash
 cd backend
 npm install
 ```
 
-3. Install frontend dependencies
+#### 3️⃣ Frontend Setup
 
 ```bash
 cd ../frontend
 npm install
 ```
 
-4. Create a `.env` file for the backend (see Environment variables section)
+#### 4️⃣ Configure Environment
 
-5. Run both servers in development
+Create `backend/.env` (see [Environment Variables](#️-environment-variables))
 
-Backend (dev):
+#### 5️⃣ Start Development Servers
 
+**Backend:**
 ```bash
 cd backend
 npm run dev
 ```
 
-Frontend (dev):
-
+**Frontend:**
 ```bash
 cd frontend
 npm run dev
 ```
 
-Open the frontend in your browser (Vite will print the local URL, usually http://localhost:5173). Backend defaults to http://localhost:3000.
+#### 6️⃣ Access Application
 
-## Environment variables
+- 🌐 **Frontend:** `http://localhost:5173`
+- 🔌 **Backend:** `http://localhost:3000`
 
-Create `backend/.env` with values similar to:
+---
 
-```
+## ⚙️ Environment Variables
+
+Create `backend/.env`:
+
+```env
+# 🌐 Server Configuration
 PORT=3000
+
+# 💾 Database
 MONGO_URI=mongodb://localhost:27017/dsatracker
-JWT_SECRET=your_jwt_secret
+
+# 🔐 Authentication
+JWT_SECRET=your_jwt_secret_key_here
+SESSION_SECRET=your_session_secret_here
+
+# 🔑 Google OAuth
 GOOGLE_CLIENT_ID=your_google_client_id
 GOOGLE_CLIENT_SECRET=your_google_client_secret
-SESSION_SECRET=your_session_secret
-OPENAI_API_KEY=your_openai_key
+
+# 🤖 AI Integration
+OPENAI_API_KEY=your_openai_api_key
 ```
 
-The backend reads environment variables in `backend/src/server.js` via `dotenv`.
+---
 
-## Available scripts
+## 📜 Available Scripts
 
-Backend (`backend/package.json`):
-- `npm run dev` - start backend with nodemon (development)
-- `npm start` - start backend with node
+### Backend (`backend/package.json`)
 
-Frontend (`frontend/package.json`):
-- `npm run dev` - start frontend with Vite
-- `npm run build` - build production frontend
-- `npm run preview` - preview the built frontend
-- `npm run lint` - run ESLint
+| Command | Description | Icon |
+|---------|-------------|------|
+| `npm run dev` | Start with nodemon (development) | 🔄 |
+| `npm start` | Start with node (production) | 🚀 |
 
-## API overview (high level)
+### Frontend (`frontend/package.json`)
 
-The backend exposes REST endpoints under `/api`. The repository contains controllers and routes for problems, topics, analytics, revision scheduling, user auth, and AI integration. Common routes (examples — check `backend/src/routes` for exact paths):
+| Command | Description | Icon |
+|---------|-------------|------|
+| `npm run dev` | Start Vite dev server | ⚡ |
+| `npm run build` | Build for production | 📦 |
+| `npm run preview` | Preview production build | 👀 |
+| `npm run lint` | Run ESLint | ✅ |
 
-- `POST /api/problem/add` - add a problem
-- `GET /api/problem/all-problems` - list all problems
-- `GET /api/problem/search?query=` - search problems
-- `GET /api/revision/revision-schedule` - fetch problems scheduled for revision
-- Auth routes: `/api/auth/google` etc. (Google OAuth via Passport)
+---
 
-Inspect `backend/src/routes` for the complete path list and controller logic.
+## 📡 API Reference
 
-## API Reference (detailed)
+> **Base URL:** `http://localhost:3000`  
+> **🔐 Auth:** Protected routes require valid authentication cookies  
+> **📦 Response:** All responses use `ApiResponse` helper
 
-Below is a complete, annotated list of the backend API endpoints exposed by the server (base URL: http://localhost:3000 by default). Each entry lists the HTTP method, full path, whether authentication is required, expected parameters / body, and a short description of the response.
+---
 
-Notes:
-- All protected routes require a valid authenticated user (the server uses cookie-based tokens in this project).
-- Responses are wrapped using the project's `ApiResponse` helper; successful responses typically contain data in the `data` field.
+### 👤 `/api/users` - User Authentication
 
-Base route prefixes used in the app:
-- /api/users - user authentication
-- /api/problem - problem CRUD + AI hint endpoint
-- /api/status - problem status (solve, notes, progress, recent)
-- /api/revision - revision scheduling endpoints
-- /api/stats - analytics endpoints
-- /api/ai - AI helper endpoints (random problems, quote, response)
+#### 📝 Register User
 
--- /api/users
+```http
+POST /api/users/register
+```
 
-- POST /api/users/register
-	- Auth: no
-	- Body: { name, email, password }
-	- Description: Creates a new user, persists refresh/access tokens in cookies, returns created user object.
+**🔓 Authentication:** Not required
 
-- POST /api/users/login
-	- Auth: no
-	- Body: { email, password }
-	- Description: Authenticates user, sets access/refresh cookies, returns user object.
+**📤 Request Body:**
+```json
+{
+  "name": "John Doe",
+  "email": "john@example.com",
+  "password": "securepassword"
+}
+```
 
-- POST /api/users/logout
-	- Auth: yes
-	- Body: none
-	- Description: Clears tokens/cookies and removes refresh token from DB for the logged-in user.
+**📥 Response:**
+```json
+{
+  "success": true,
+  "data": {
+    "user": {
+      "_id": "...",
+      "name": "John Doe",
+      "email": "john@example.com"
+    }
+  }
+}
+```
 
--- /api/problem
+**📝 Description:** Creates a new user and sets access/refresh tokens in cookies
 
-- POST /api/problem/add
-	- Auth: yes
-	- Body: { title, difficulty, topic, problemNo, pattern?, url?, platform?, problemStatus? }
-	- Description: Adds a new problem for the authenticated user. If problemStatus is `solved`, the server also creates ProblemStatus with revision dates.
-	- Response: created problem object.
+---
 
-- PUT /api/problem/update/:problemNo
-	- Auth: yes
-	- Path params: problemNo
-	- Body: any subset of updatable fields (title, difficulty, problemNo, url, platform, topic, pattern, problemStatus)
-	- Description: Updates a user's problem by problemNo. Topic and pattern are resolved by name to object IDs.
-	- Response: updated problem object.
+#### 🔑 Login User
 
-- DELETE /api/problem/delete/:problemNo
-	- Auth: yes
-	- Path params: problemNo
-	- Description: Deletes the problem owned by the user and its associated ProblemStatus document.
-	- Response: deleted problem object.
+```http
+POST /api/users/login
+```
 
-- GET /api/problem/all-problems
-	- Auth: yes
-	- Query params (optional): difficulty, topic, pattern, problemStatus
-	- Description: Returns all problems for the authenticated user. Filters apply when present. Populates topic, pattern, problemStatus and user fields.
+**🔓 Authentication:** Not required
 
-- GET /api/problem/single-problem
-	- Auth: yes
-	- Query params: title (partial match, case-insensitive) OR problemNo
-	- Description: Returns a single problem that matches title or problemNo for the logged-in user.
+**📤 Request Body:**
+```json
+{
+  "email": "john@example.com",
+  "password": "securepassword"
+}
+```
 
-- POST /api/problem/hint
-	- Auth: yes
-	- Body: { prompt }
-	- Description: Forwards the prompt to the AI helper and returns an `aiReply` (used for hints/chat responses related to a problem).
+**📥 Response:**
+```json
+{
+  "success": true,
+  "data": {
+    "user": {
+      "_id": "...",
+      "name": "John Doe",
+      "email": "john@example.com"
+    }
+  }
+}
+```
 
--- /api/status
+**📝 Description:** Authenticates user and sets cookies
 
-- POST /api/status/solved/:problemNo
-	- Auth: yes
-	- Path params: problemNo
-	- Description: Marks a problem as `solved` if it belongs to the user. Updates lastAttempted and computes revision dates [0,3,7,14,30].
-	- Response: ProblemStatus document for the problem.
+---
 
-- GET /api/status/stats
-	- Auth: yes
-	- Description: Aggregated counts of problems grouped by status (solved/attempted/unsolved) for the user.
+#### 🚪 Logout User
 
-- GET /api/status/progress
-	- Auth: yes
-	- Description: Returns totalProblems, solvedProblems and a `progress` string (e.g., "3/10"). Useful for dashboard progress bars.
+```http
+POST /api/users/logout
+```
 
-- POST /api/status/:problemNo/addnote
-	- Auth: yes
-	- Path params: problemNo
-	- Body: { intuition }
-	- Description: Saves a one-liner/intuition note on the problem's ProblemStatus document.
+**🔐 Authentication:** Required
 
-- GET /api/status/recentproblems
-	- Auth: yes
-	- Query params (optional): limit (integer)
-	- Description: Returns recently updated/solved problems for the user (selects problemNo, title, difficulty, updatedAt).
+**📥 Response:**
+```json
+{
+  "success": true,
+  "message": "User logged out successfully"
+}
+```
 
-- GET /api/status/solvedproblems
-	- Auth: yes
-	- Query params: date (ISO date string)
-	- Description: Returns problems solved on a particular day (filtered by ProblemStatus.updatedAt). Response contains problem metadata.
+**📝 Description:** Clears tokens and removes refresh token from database
 
--- /api/revision
+---
 
-- POST /api/revision/:problemNo/revisiondone
-	- Auth: yes
-	- Path params: problemNo
-	- Description: Marks today's scheduled revision as completed by removing today's entry from the revisionDate array on ProblemStatus.
+### 📝 `/api/problem` - Problem Management
 
-- GET /api/revision/revision-schedule
-	- Auth: yes
-	- Description: Returns today's revision schedule for the authenticated user (problem title, difficulty, problemNo, url, status).
+#### ➕ Add Problem
 
-Note: The controllers also export an `upcomingRevisionSchedule` helper (to fetch future revisions) but the current routes only expose the two endpoints above.
+```http
+POST /api/problem/add
+```
 
--- /api/stats
+**🔐 Authentication:** Required
 
-- GET /api/stats/getstats
-	- Auth: yes
-	- Description: Returns overall counts (solved, attempted, unsolved) for the user.
+**📤 Request Body:**
+```json
+{
+  "title": "Two Sum",
+  "difficulty": "Easy",
+  "topic": "Array",
+  "problemNo": 1,
+  "pattern": "Hash Table",
+  "url": "https://leetcode.com/problems/two-sum",
+  "platform": "LeetCode",
+  "problemStatus": "solved"
+}
+```
 
-- GET /api/stats/getstatsbydiff
-	- Auth: yes
-	- Description: Returns counts of problems grouped by difficulty for the user.
+**📥 Response:**
+```json
+{
+  "success": true,
+  "data": {
+    "problem": {
+      "_id": "...",
+      "title": "Two Sum",
+      "difficulty": "Easy",
+      "problemNo": 1
+    }
+  }
+}
+```
 
-- GET /api/stats/getstatsbytopic
-	- Auth: yes
-	- Description: Returns a list of topics with solved counts (topic name and count) for the user.
+**📝 Description:** Adds a new problem. If status is `solved`, creates revision schedule automatically
 
--- /api/ai
+---
 
-- POST /api/ai/random
-	- Auth: no
-	- Body: none
-	- Description: Asks the AI helper to generate exactly five random DSA problem statements. Returns { numberedItems: ["1. ...","2. ...", ...] }.
+#### ✏️ Update Problem
 
-- POST /api/ai/Quote
-	- Auth: no
-	- Body: none
-	- Description: Generates a short motivational quote using the AI helper.
+```http
+PUT /api/problem/update/:problemNo
+```
 
-- POST /api/ai/response
-	- Auth: yes
-	- Body: { prompt }
-	- Description: Returns an AI-generated response to a prompt (used by the chatbot/hint feature). Response contains `{ aiReply }`.
+**🔐 Authentication:** Required
 
-Quick notes on error handling and shapes
-- Most controllers throw `ApiError` on bad requests (status-codes and messages). The error middleware in the server converts these to proper JSON responses.
-- For accurate request/response JSON shapes, refer to the controller implementations under `backend/src/controllers/*` (the README above links to the routes folder).
+**🎯 Path Parameters:** `problemNo` (integer)
 
+**📤 Request Body:** (any subset of fields)
+```json
+{
+  "title": "Two Sum Updated",
+  "difficulty": "Medium",
+  "url": "https://leetcode.com/problems/two-sum"
+}
+```
 
-## Frontend routes & components
+**📥 Response:**
+```json
+{
+  "success": true,
+  "data": {
+    "problem": { /* updated problem */ }
+  }
+}
+```
 
-Key pages (under `frontend/src/pages`):
-- `Home` - dashboard with charts, calendar, recent problems and the chatbot
-- `Problems` - list problems table
-- `AddProblem` - form to add a new problem
-- `Revision` - revision dashboard
-- `Settings`, `Login`, `AI` - additional pages
+**📝 Description:** Updates problem by problemNo
 
-Important components:
-- `ProblemForm` / `ProblemsAdd.jsx` - form to create problems
-- `Problemtable.jsx` - table that renders fetched problems
-- `Recentproblems.jsx` - small widget listing recent problems
-- `Chatbot.jsx` - floating chat assistant
-- `Calendar.jsx` - calendar integration using `react-calendar`
+---
 
-There's a `ProblemContext.jsx` provider used to share problem state between components.
+#### 🗑️ Delete Problem
 
-## Developer notes & suggestions
+```http
+DELETE /api/problem/delete/:problemNo
+```
 
-- The frontend uses Tailwind classes; ensure Tailwind is configured in `tailwind.config.js` (search in the repo).
-- Several components render static placeholder data (AI assistant responses, recent problems). Connect those to backend endpoints for dynamic data.
-- Confirm that `Problemtable` accepts `problems` prop (frontend pages fetch problems and pass data to components).
+**🔐 Authentication:** Required
 
-## License
+**🎯 Path Parameters:** `problemNo` (integer)
 
-This project is licensed under the MIT License — see the `LICENSE` file for details.
+**📥 Response:**
+```json
+{
+  "success": true,
+  "data": {
+    "problem": { /* deleted problem */ }
+  }
+}
+```
+
+**📝 Description:** Deletes problem and associated status
+
+---
+
+#### 📋 Get All Problems
+
+```http
+GET /api/problem/all-problems
+```
+
+**🔐 Authentication:** Required
+
+**🔍 Query Parameters:** (optional)
+- `difficulty` - Filter by difficulty
+- `topic` - Filter by topic
+- `pattern` - Filter by pattern
+- `problemStatus` - Filter by status
+
+**📥 Response:**
+```json
+{
+  "success": true,
+  "data": {
+    "problems": [
+      {
+        "_id": "...",
+        "title": "Two Sum",
+        "difficulty": "Easy",
+        "topic": { "name": "Array" },
+        "problemNo": 1
+      }
+    ]
+  }
+}
+```
+
+**📝 Description:** Returns all problems with optional filters
+
+---
+
+#### 🔍 Get Single Problem
+
+```http
+GET /api/problem/single-problem
+```
+
+**🔐 Authentication:** Required
+
+**🔍 Query Parameters:** (one required)
+- `title` - Search by title (partial match)
+- `problemNo` - Search by problem number
+
+**📥 Response:**
+```json
+{
+  "success": true,
+  "data": {
+    "problem": { /* problem details */ }
+  }
+}
+```
+
+**📝 Description:** Returns a single matching problem
+
+---
+
+#### 💡 Get AI Hint
+
+```http
+POST /api/problem/hint
+```
+
+**🔐 Authentication:** Required
+
+**📤 Request Body:**
+```json
+{
+  "prompt": "How do I approach the Two Sum problem?"
+}
+```
+
+**📥 Response:**
+```json
+{
+  "success": true,
+  "data": {
+    "aiReply": "For Two Sum, consider using a hash table..."
+  }
+}
+```
+
+**📝 Description:** Get AI-powered hints for problems
+
+---
+
+### ✅ `/api/status` - Problem Status
+
+#### ✔️ Mark as Solved
+
+```http
+POST /api/status/solved/:problemNo
+```
+
+**🔐 Authentication:** Required
+
+**🎯 Path Parameters:** `problemNo` (integer)
+
+**📥 Response:**
+```json
+{
+  "success": true,
+  "data": {
+    "status": {
+      "problemId": "...",
+      "status": "solved",
+      "revisionDate": ["2025-01-11", "2025-01-14", "2025-01-18"]
+    }
+  }
+}
+```
+
+**📝 Description:** Marks problem as solved and creates revision schedule [0, 3, 7, 14, 30 days]
+
+---
+
+#### 📊 Get Stats
+
+```http
+GET /api/status/stats
+```
+
+**🔐 Authentication:** Required
+
+**📥 Response:**
+```json
+{
+  "success": true,
+  "data": {
+    "stats": [
+      { "_id": "solved", "count": 45 },
+      { "_id": "attempted", "count": 12 },
+      { "_id": "unsolved", "count": 8 }
+    ]
+  }
+}
+```
+
+**📝 Description:** Returns problem counts grouped by status
+
+---
+
+#### 📈 Get Progress
+
+```http
+GET /api/status/progress
+```
+
+**🔐 Authentication:** Required
+
+**📥 Response:**
+```json
+{
+  "success": true,
+  "data": {
+    "totalProblems": 65,
+    "solvedProblems": 45,
+    "progress": "45/65"
+  }
+}
+```
+
+**📝 Description:** Returns overall progress metrics
+
+---
+
+#### 📝 Add Note
+
+```http
+POST /api/status/:problemNo/addnote
+```
+
+**🔐 Authentication:** Required
+
+**🎯 Path Parameters:** `problemNo` (integer)
+
+**📤 Request Body:**
+```json
+{
+  "intuition": "Use hash table for O(n) solution"
+}
+```
+
+**📥 Response:**
+```json
+{
+  "success": true,
+  "data": {
+    "status": { /* updated status with note */ }
+  }
+}
+```
+
+**📝 Description:** Adds a note/intuition to problem
+
+---
+
+#### 🕒 Get Recent Problems
+
+```http
+GET /api/status/recentproblems
+```
+
+**🔐 Authentication:** Required
+
+**🔍 Query Parameters:** (optional)
+- `limit` - Number of problems (default: 10)
+
+**📥 Response:**
+```json
+{
+  "success": true,
+  "data": {
+    "problems": [
+      {
+        "problemNo": 1,
+        "title": "Two Sum",
+        "difficulty": "Easy",
+        "updatedAt": "2025-01-11T10:30:00Z"
+      }
+    ]
+  }
+}
+```
+
+**📝 Description:** Returns recently solved/updated problems
+
+---
+
+#### 📅 Get Solved Problems by Date
+
+```http
+GET /api/status/solvedproblems?date=2025-01-11
+```
+
+**🔐 Authentication:** Required
+
+**🔍 Query Parameters:**
+- `date` - ISO date string (YYYY-MM-DD)
+
+**📥 Response:**
+```json
+{
+  "success": true,
+  "data": {
+    "problems": [ /* problems solved on that date */ ]
+  }
+}
+```
+
+**📝 Description:** Returns problems solved on specific date
+
+---
+
+### 🔄 `/api/revision` - Revision System
+
+#### ✅ Mark Revision Done
+
+```http
+POST /api/revision/:problemNo/revisiondone
+```
+
+**🔐 Authentication:** Required
+
+**🎯 Path Parameters:** `problemNo` (integer)
+
+**📥 Response:**
+```json
+{
+  "success": true,
+  "message": "Revision marked as complete"
+}
+```
+
+**📝 Description:** Removes today's date from revision schedule
+
+---
+
+#### 📅 Get Revision Schedule
+
+```http
+GET /api/revision/revision-schedule
+```
+
+**🔐 Authentication:** Required
+
+**📥 Response:**
+```json
+{
+  "success": true,
+  "data": {
+    "schedule": [
+      {
+        "title": "Two Sum",
+        "difficulty": "Easy",
+        "problemNo": 1,
+        "url": "https://leetcode.com/problems/two-sum",
+        "status": "pending"
+      }
+    ]
+  }
+}
+```
+
+**📝 Description:** Returns today's revision schedule
+
+---
+
+### 📊 `/api/stats` - Analytics
+
+#### 📈 Get Overall Stats
+
+```http
+GET /api/stats/getstats
+```
+
+**🔐 Authentication:** Required
+
+**📥 Response:**
+```json
+{
+  "success": true,
+  "data": {
+    "solved": 45,
+    "attempted": 12,
+    "unsolved": 8
+  }
+}
+```
+
+**📝 Description:** Returns overall problem statistics
+
+---
+
+#### 📊 Get Stats by Difficulty
+
+```http
+GET /api/stats/getstatsbydiff
+```
+
+**🔐 Authentication:** Required
+
+**📥 Response:**
+```json
+{
+  "success": true,
+  "data": {
+    "stats": [
+      { "difficulty": "Easy", "count": 20 },
+      { "difficulty": "Medium", "count": 18 },
+      { "difficulty": "Hard", "count": 7 }
+    ]
+  }
+}
+```
+
+**📝 Description:** Returns problem counts by difficulty
+
+---
+
+#### 📊 Get Stats by Topic
+
+```http
+GET /api/stats/getstatsbytopic
+```
+
+**🔐 Authentication:** Required
+
+**📥 Response:**
+```json
+{
+  "success": true,
+  "data": {
+    "stats": [
+      { "topic": "Array", "count": 15 },
+      { "topic": "Tree", "count": 12 },
+      { "topic": "Graph", "count": 8 }
+    ]
+  }
+}
+```
+
+**📝 Description:** Returns solved problem counts by topic
+
+---
+
+### 🤖 `/api/ai` - AI Assistant
+
+#### 🎲 Generate Random Problems
+
+```http
+POST /api/ai/random
+```
+
+**🔓 Authentication:** Not required
+
+**📥 Response:**
+```json
+{
+  "success": true,
+  "data": {
+    "numberedItems": [
+      "1. Implement a function to reverse a linked list",
+      "2. Find the longest common subsequence",
+      "3. Design a LRU Cache",
+      "4. Implement binary search in a rotated array",
+      "5. Find all anagrams in a string"
+    ]
+  }
+}
+```
+
+**📝 Description:** Generates 5 random DSA problem statements
+
+---
+
+#### 💬 Get Motivational Quote
+
+```http
+POST /api/ai/Quote
+```
+
+**🔓 Authentication:** Not required
+
+**📥 Response:**
+```json
+{
+  "success": true,
+  "data": {
+    "quote": "Every expert was once a beginner. Keep coding!"
+  }
+}
+```
+
+**📝 Description:** Returns a motivational quote
+
+---
+
+#### 💡 Get AI Response
+
+```http
+POST /api/ai/response
+```
+
+**🔐 Authentication:** Required
+
+**📤 Request Body:**
+```json
+{
+  "prompt": "Explain dynamic programming"
+}
+```
+
+**📥 Response:**
+```json
+{
+  "success": true,
+  "data": {
+    "aiReply": "Dynamic programming is a method for solving..."
+  }
+}
+```
+
+**📝 Description:** Get AI-powered responses to queries
+
+---
+
+## 🎨 Frontend Routes & Components
+
+### 📄 Key Pages
+
+| Route | Component | Description | Icon |
+|-------|-----------|-------------|------|
+| `/` | `Home` | Dashboard with charts, calendar, chatbot | 🏠 |
+| `/problems` | `Problems` | Problem list table | 📝 |
+| `/add` | `AddProblem` | Add new problem form | ➕ |
+| `/revision` | `Revision` | Revision dashboard | 🔄 |
+| `/settings` | `Settings` | User settings | ⚙️ |
+| `/login` | `Login` | Authentication page | 🔐 |
+| `/ai` | `AI` | AI assistant interface | 🤖 |
+
+### 🧩 Important Components
+
+#### 📝 ProblemForm / ProblemsAdd
+- Form to create new problems
+- Validation and error handling
+- Topic and pattern selection
+
+#### 📊 Problemtable
+- Renders problem list table
+- Sorting and filtering
+- Action buttons (edit, delete)
+
+#### 🕒 Recentproblems
+- Widget showing recent problems
+- Quick access to recent work
+- Status indicators
+
+#### 💬 Chatbot
+- Floating AI assistant
+- Problem hints and explanations
+- Motivational quotes
+
+#### 📅 Calendar
+- Visual daily progress tracking
+- Uses `react-calendar`
+- Marks solved problem dates
+
+#### 🔗 ProblemContext
+- Global state management
+- Shares problem data across components
+- Reduces prop drilling
+
+---
+
+## 💡 Developer Notes & Suggestions
+
+### 🎨 Styling
+- ✅ Tailwind CSS configured in `tailwind.config.js`
+- ✅ Custom classes for components
+- ✅ Responsive design patterns
+
+### 🔌 API Integration
+- ⚠️ Connect placeholder data to backend endpoints
+- ⚠️ Implement error boundaries
+- ⚠️ Add loading states
+
+### 📊 Data Flow
+- ✅ `ProblemContext` for state management
+- ✅ Props passed to `Problemtable`
+- ⚠️ Consider adding Redux/Zustand for complex state
+
+### 🔐 Security
+- ✅ JWT authentication implemented
+- ✅ Cookie-based sessions
+- ⚠️ Add CSRF protection
+- ⚠️ Implement rate limiting
+
+### 🚀 Performance
+- ⚠️ Implement pagination for problem lists
+- ⚠️ Add debouncing for search
+- ⚠️ Consider lazy loading components
+
+### 🧪 Testing
+- ⚠️ Add unit tests for components
+- ⚠️ API endpoint testing
+- ⚠️ E2E testing with Playwright
+
+---
+
+## 📄 License
+
+This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for details.
+
+---
+
+<div align="center">
+
+**Made with ❤️ for the DSA Community**
+
+⭐ Star this repo if you find it helpful!
+
+</div>
