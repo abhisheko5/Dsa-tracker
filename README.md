@@ -316,3 +316,7 @@ There's a `ProblemContext.jsx` provider used to share problem state between comp
 - The frontend uses Tailwind classes; ensure Tailwind is configured in `tailwind.config.js` (search in the repo).
 - Several components render static placeholder data (AI assistant responses, recent problems). Connect those to backend endpoints for dynamic data.
 - Confirm that `Problemtable` accepts `problems` prop (frontend pages fetch problems and pass data to components).
+
+## License
+
+This project is licensed under the MIT License — see the `LICENSE` file for details.
