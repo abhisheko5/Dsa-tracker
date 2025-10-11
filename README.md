@@ -960,8 +960,4 @@ This project is licensed under the **MIT License** — see the [LICENSE](LICENSE
 
 ⭐ Star this repo if you find it helpful!
 
-<<<<<<< HEAD
 </div>
-=======
-</div>
->>>>>>> 2ab7f69edccf118e9ed19653c87eb296c3b1f2bd
